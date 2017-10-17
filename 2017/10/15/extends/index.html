@@ -9,56 +9,38 @@
         
     </title>
     <link rel="icon" href= https://blogres.kurobane.xin/baseimg/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
     <!-- 提前加载place holder  -->
-    <style>
+    <style type="text/css">
         @font-face {
             font-family: 'Oswald-Regular';
             src: url('/font/Oswald-Regular.ttf');
         }
-        @font-face {
-            font-family: 'Source Sans Pro';
-            src: url('/font/Source Sans Pro.woff'),
-            url('/font/Source Sans Pro.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Source Code Pro';
-            src: url('/font/SourceCodePro-Regular.ttf.woff'),
-            url('/font/SourceCodePro-Regular.ttf.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        
+    </style>
+    <style type="text/css">
         .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0px;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2s ease-out 0s 1;
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
         }
         @keyframes gradient-move {
         0% {
             transform: translate3d(-226px, 0, 0);
         }
-        99% {
+        100% {
             transform: translate3d(0, 0, 0);
         }
-        99.1% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(-226px, 0, 0);
-        }
     }
-    </style>
-    <link rel="stylesheet" href = /css/style.css?v=20171005 />
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171017 />
     <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
     
     <script src="/scripts/main.js" defer></script>
@@ -131,7 +113,42 @@
         
     </div>
 </div>
-        <div class="container">
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    let postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                    if (postIntroTags) {
+                        postIntroTags.classList.add('post-fade-in');
+                    }
+                    if (postIntroMeat) {
+                        postIntroMeat.classList.add('post-fade-in');
+                    }
+                }
+            }
+
+            WebFont.load({
+                custom: {
+                    families: ['Oswald-Regular']
+                },
+                loading: function () {  //所有字体开始加载
+                    // console.log('loading');
+                },
+                active: function () {  //所有字体已渲染
+                    fontLoaded();
+                },
+                inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                    console.log('inactive: timeout');
+                    fontLoaded();
+                },
+                timeout: 10000 // Set the timeout to two seconds
+            });
+        </script>
+        <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
         <p>继承实现的实质是重写原型对象。为的是提高代码的复用性。<br>JS中的继承主要通过原型去实现继承，由于JS的函数没有像Java函数的函数签名，因此JS并不能实现接口继承，只能通过原型去实现继承。</p>
@@ -202,7 +219,7 @@
             <!-- profile -->
             
         </div>
-        <footer class="footer">
+        <footer class="footer footer-unloaded">
     <!-- social  -->
     <!--  -->
     <!-- <div class="social"> -->
@@ -236,7 +253,7 @@
     
     <div class="toc-wrapper">
         <div class="toc-catalog">
-            CATALOG
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝继承"><span class="toc-number">1.</span> <span class="toc-text">拷贝继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特点"><span class="toc-number">1.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链继承"><span class="toc-number">2.</span> <span class="toc-text">原型链继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项"><span class="toc-number">2.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-1"><span class="toc-number">2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#借用构造函数继承（Constructor-Stealing）"><span class="toc-number">3.</span> <span class="toc-text">借用构造函数继承（Constructor Stealing）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-2"><span class="toc-number">3.1.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合继承"><span class="toc-number">4.</span> <span class="toc-text">组合继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-3"><span class="toc-number">4.1.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型式继承"><span class="toc-number">5.</span> <span class="toc-text">原型式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄生式继承"><span class="toc-number">6.</span> <span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄生组合式继承"><span class="toc-number">7.</span> <span class="toc-text">寄生组合式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips"><span class="toc-number">8.</span> <span class="toc-text">Tips</span></a></li></ol>
     </div>
