@@ -240,6 +240,23 @@
 <!-- City版安装代码已完成 -->
     
     
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "JS继承", // 可选。默认为 location.href
+        owner: 'kurobanekid',
+        repo: 'git@github.com:kurobanekid/blog-comment.git',
+        oauth: {
+            client_id: '0d35d3bbc9231f294b1f',
+            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
     <!--PC版-->
 
     <!--PC版-->
