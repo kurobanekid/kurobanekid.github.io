@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>几个简单排序算法 · KurobaneKid&#39;s Lab</title>
+    <title>KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -251,23 +251,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >KurobaneKid&#39;s Lab</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">几个简单排序算法</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>KurobaneKid's Lab</a>
 </header>
@@ -279,137 +268,79 @@
 
 
 
-height:50vh;
+
 
 >
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/intro/post.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            几个简单排序算法
-            <!-- 404 -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-                <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = 算法>算法</a>
-    
-</div>
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/06</span>
-                
-                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                    <span class="iconfont-archer">&#xe602;</span>
-                    <span id="busuanzi_value_page_pv"></span>
-                </span>
-                
-                <span class="shareWrapper">
-                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                    <span class="shareText">Share</span>
-                    <ul class="shareList">
-                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                            <div class="share-qrcode"></div>
-                        </li>
-                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                    </ul>
-                </span>
-            </div>
         
     </div>
 </div>
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <p>在编程入门时应该知道排序和查找是程序猿的基本素质要求。那么现在介绍几个简单的排序算法。冒泡排序、选择排序、插入排序。<br>这三种排序的名字表白了它们的思维方式，也反映了这些排序算法很逼真的模拟了人类现实生活中对数据排序的方法。<strong>排序一般是通过嵌套for循环完成，外循环完成遍历数组的每一项的任务，而内循环则是进行数据值的比较。</strong></p>
-<h2 id="冒泡排序-BubbleSort"><a href="#冒泡排序-BubbleSort" class="headerlink" title="冒泡排序(BubbleSort)"></a>冒泡排序(BubbleSort)</h2><p>冒泡排序里数据值就像气泡那样从底部往水面顶部移动（数据值大的往上[往右]移动）。冒泡排序是最容易实现的排序算法，也是最慢的一种排序。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> tailIndex = arr.length<span class="number">-1</span>; <span class="comment">// 数组最后一个元素的下标</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> outer = <span class="number">0</span>; outer &lt; tailIndex; outer++)&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> inner = <span class="number">0</span>; inner &lt; tailIndex - outer; inner++)&#123;</div><div class="line">      <span class="keyword">if</span>(arr[inner] &gt; arr[inner+<span class="number">1</span>])&#123;</div><div class="line">        swap(arr,inner,inner+<span class="number">1</span>); <span class="comment">// 伪代码，表示将下标为inner与(inner+1)的元素进行交换(swap)</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>冒泡排序算法需要理解的主要地方是外层循环与内层循环的范围边界。<br>首先outer&lt;tailIndex，总共需要进行多少次外循环呢？注意是小于符号(&lt;)，并非小于等于符号(&lt;=)。如果不知道怎么算，可以用代入法，假设目标数组长度为10，tailIndex就是9，从0开始并且小于9(0-8)，就是需要循环9次。因此需要循环(arr.length-1)次，之所以不是arr.length次，是因为剩余的最后一次不用排序了，前面的元素都已经排好了。<br>然后到inner&lt;tailIndex-outer，外层每循环一次就代表有一个元素升到顶端（最右端）完成排序了。前面提到外循环是负责遍历数组，内循环是比较数据值。因此，每完成一个元素的排序，内循环就可以比上次少一次比较。故内循环范围控制变量受外循环遍历次数的影响。<br>其次由于比较后会进行交换，可以知道如果是最大的元素一定会被不断交换，向右移动，就出现了冒泡的现象。<br><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/bubbleSort.png" alt="冒泡排序"></p>
-<h2 id="选择排序-SelectionSort"><a href="#选择排序-SelectionSort" class="headerlink" title="选择排序(SelectionSort)"></a>选择排序(SelectionSort)</h2><p>选择排序算法核心是每次循环选出最小的数据值。上面我们分析过冒泡排序的范围控制，这里我们可以思考一下选择排序外循环与内循环的范围控制。同理外循环需要(arr.length-1)次，剩余的最后一个不需排序。而内循环则是从当前遍历元素下一个元素开始进行比较直到最后一个元素，以选出最小值。因为前面的元素已经是上几轮的最小值了，只要考虑之后的元素，所以从当前遍历元素下一个开始比较。<br><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/selectionSort.png" alt="选择排序"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectionSort</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> min;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> outer = <span class="number">0</span>; outer &lt; arr.length<span class="number">-1</span>; outer++)&#123;</div><div class="line">    min = outer;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> inner = outer+<span class="number">1</span>; inner &lt; arr.length; inner++)&#123;</div><div class="line">      <span class="keyword">if</span>(arr[inner] &lt; arr[min])&#123;</div><div class="line">        min = inner; <span class="comment">// 更新最小值元素的下标</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    swap(arr,outer,min); <span class="comment">// 将当前元素与最小值进行交换</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="插入排序-insertionSort"><a href="#插入排序-insertionSort" class="headerlink" title="插入排序(insertionSort)"></a>插入排序(insertionSort)</h2><p>插入排序算法的核心可以与我们排列扑克牌很类似。下面情况不考虑花色，第一次有一张10，我们放到桌上，然后一张K，这时将K放到10右边，然后5，放到10的左边，7则放到（插入到）5和10之间，依次类推，就能完成扑克牌的排序。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertionSort</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> temp,inner;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> outer = <span class="number">1</span>; outer &lt; arr.length; outer++)&#123;</div><div class="line">    temp = arr[outer]; <span class="comment">// 保存当前元素值</span></div><div class="line">    inner = outer<span class="number">-1</span>;</div><div class="line">    <span class="keyword">while</span>(inner&gt;=<span class="number">0</span> &amp;&amp; arr[inner]&gt;temp)&#123;</div><div class="line">      arr[inner+<span class="number">1</span>] = arr[inner]; <span class="comment">// 大元素向右移动，为小元素腾出位置</span></div><div class="line">      inner--;</div><div class="line">    &#125;</div><div class="line">    arr[inner+<span class="number">1</span>] = temp; <span class="comment">// 填补腾出的位置</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h3><p>插入排序理解的难点在于内循环。前面举过扑克牌的例子，7要插入到5和10之间，因为7的位置由它与其他元素比较的出来的。outer前的元素都是完成了插入这一过程的，即是说，outer前的元素都已排好序。7插入前，5、10、K三者已经排好序（已经有序地插入完了）。所以当前元素arr[outer]就需要与outer前的元素进行比较，inner就取outer前一个元素，如果前一元素比当前元素大，就向右移动arr[inner+1] = arr[inner]，一直进行比较直到已经比较到第一个元素arr[0]或者前面的元素已经比当前元素小了（找到合适位置了）。由于最后一次内循环inner–，因此需要inner+1，代表当前元素的合适位置，通过赋值填补腾出的位置即可。</p>
-<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/insertionSort.png" alt="插入排序"></p>
-<h2 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h2><p>冒泡排序&lt;选择排序&lt;插入排序</p>
-
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/06/Linux-Package-Install/" title= Linux软件包管理 >
-                    <div class="nextTitle">Linux软件包管理</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2017/10/15/extends/" title= JS继承 >
-                    <div class="prevTitle">JS继承</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
+            <main class="main index-page">
     
     
-<div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-    var gitment = new Gitment({
-        // id: "几个简单排序算法", // 可选。默认为 location.href
-        owner: 'kurobanekid',
-        repo: 'blog-comment',
-        oauth: {
-            client_id: '0d35d3bbc9231f294b1f',
-            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
-        },
-    })
-    gitment.render('container')
-
-</script>
-
-    <!--PC版-->
-
-    <!--PC版-->
-
-
     
-    <!-- 评论 -->
+        <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/06/Linux-Package-Install/" >
+                
+                    <span>Linux软件包管理</span>
+            </a>
+            <div class="abstract-content">
+                Linux软件包安装方式：1. 源码包安装下载源码包后，通过本地编译后进行安装
+优点
+开源。能够阅读软件包(Package)的源代码进行学习
+自由度高。通过修改软件源码进行自定义安装
+稳定性高。因为软件是通过本机编译安装。比同样软件用rpm包安装后提升大约5%，也更加稳定
+
+缺点
+安装比较大的软件时，步骤较为繁琐，有可能出错
+安装时间较长（因为需要进行编译）
+编译可能报错，对入门者并不友好
+
+2. 二进制安装（rpm包/系统默认安装）软件厂商将源码包编译成二进制文件，用户直接安装就可以
+优点
+安装时间较快
+通过简单命令能够对软件进行升级、删除、修改
+
+缺点
+自由度比源码包安装方式弱一些。...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/06</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = Linux>Linux</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
 </main>
             <!-- profile -->
             
@@ -482,22 +413,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序-BubbleSort"><span class="toc-number">1.</span> <span class="toc-text">冒泡排序(BubbleSort)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解析"><span class="toc-number">1.1.</span> <span class="toc-text">解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择排序-SelectionSort"><span class="toc-number">2.</span> <span class="toc-text">选择排序(SelectionSort)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入排序-insertionSort"><span class="toc-number">3.</span> <span class="toc-text">插入排序(insertionSort)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解析-1"><span class="toc-number">3.1.</span> <span class="toc-text">解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能比较"><span class="toc-number">4.</span> <span class="toc-text">性能比较</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -634,8 +549,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
