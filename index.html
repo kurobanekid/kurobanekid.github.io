@@ -312,6 +312,42 @@ height:50vh;
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/09/DFS-BFS/" >
+                
+                    <span>深度优先遍历与广度优先遍历</span>
+            </a>
+            <div class="abstract-content">
+                深度优先遍历先介绍深度优先遍历。深度优先遍历从一路径的起始点开始追溯，直到遍历该路径的最后一个节点，然后回溯，继续追溯下一路径，依次类推，直到遍历完成。如上图所示。深度优先遍历实现相对简单，通过递归即可完成。不断递归，直到本路径最后一个节点，然后回溯，继续递归。
+广度优先遍历广度优先遍历，则优先遍历同一层次最邻近的节点，然后再往下遍历上一层首个节点的下层节点。如上图所示。由于往下遍历时，关系到上一层节点，因此通过队列实现。主要步骤如下：
+
+将根节点添加到队列中
+从队列中取出(shift)第一个节点遍历
+如果节点含有下一层节点，则添加到队列中（所有下层节点）
+
+
+重复步骤2直到队列为空
+
+...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/09</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = 算法>算法</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/03/08/height-100不起作用/" >
                 
                     <span>height:100%不起作用?</span>
@@ -638,7 +674,16 @@ height:50vh;
     
     
     
-    <div class="total-archive"> Total : 4 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 5 </div>
     
     <div class="post-archive">
     
@@ -647,6 +692,11 @@ height:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2018/03/09/DFS-BFS/" >深度优先遍历与广度优先遍历</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -682,13 +732,13 @@ height:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="算法"><span class="iconfont-archer">&#xe606;</span>算法</span>
+    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
     
         <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
-    
-        <span class="sidebar-tag-name" data-tags="算法"><span class="iconfont-archer">&#xe606;</span>算法</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>height:100%不起作用? · KurobaneKid&#39;s Lab</title>
+    <title>深度优先遍历与广度优先遍历 · KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -265,7 +265,7 @@
                 <a href="/" >KurobaneKid&#39;s Lab</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">height:100%不起作用?</a>
+                <a href="#" class="post-name">深度优先遍历与广度优先遍历</a>
             </div>
     </div>
     
@@ -295,7 +295,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            height:100%不起作用?
+            深度优先遍历与广度优先遍历
             <!-- 404 -->
             
         </h1>
@@ -313,13 +313,13 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = CSS>CSS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = 算法>算法</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/08</span>
+                <span class="post-intro-time">2018/03/09</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -348,26 +348,34 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>二话不说先上代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>KurobaneKid's Lab<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"height: 100%"</span>&gt;</span>Just for a test<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>大家第一感觉p元素的高度是不是将会是屏幕的高度（填充整个屏幕）呢？毫无疑问，答案是否定的。<br>直觉上认为p元素的高度100%就是填充整个屏幕，说明什么呢？我们都认为这个100%是以屏幕的高度作为参照物。但是页面默认高度并不是屏幕高度(screen.height)，而是auto，高度根据内容自适应，可以说是包裹了页面的内容。对于浏览器来说宽度的缺省值将会是屏幕的宽度，但是高度并非如此。当内容不断增加，超出屏幕可显示范围，就会出现滚动条，因此高度一般并不需要考虑。<br>那么我们如何让p元素的高度=屏幕高度呢？前面其实有一定的提示。参照物，百分比是具有参照性的。五五分账，这是相对要分的那笔钱而言的。所以p元素的参照物只要是屏幕高度就可以了，而p元素的参照物是父元素body，但是将body高度也设置为100%一样不起作用，因为body也要参照啊，进一步将html的高度也设置为100%就能起作用了。<strong>换句话说，如果需要一个子元素的heigth:100%有效，就需要将它的所有父元素设置为一个有效值。</strong></p>
+        <h2 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h2><p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86DFS.png" alt="深度优先遍历"><br>先介绍深度优先遍历。深度优先遍历从一路径的起始点开始追溯，直到遍历该路径的最后一个节点，然后回溯，继续追溯下一路径，依次类推，直到遍历完成。如上图所示。<br>深度优先遍历实现相对简单，通过递归即可完成。不断递归，直到本路径最后一个节点，然后回溯，继续递归。</p>
+<h2 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h2><p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86BFS.png" alt="广度优先遍历"><br>广度优先遍历，则优先遍历同一层次最邻近的节点，然后再往下遍历上一层首个节点的下层节点。如上图所示。<br>由于往下遍历时，关系到上一层节点，因此通过队列实现。<br>主要步骤如下：</p>
+<ol>
+<li>将根节点添加到队列中</li>
+<li>从队列中取出(shift)第一个节点遍历<ul>
+<li>如果节点含有下一层节点，则添加到队列中（所有下层节点）</li>
+</ul>
+</li>
+<li>重复步骤2直到队列为空</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>实现代码我们以遍历DOM树为例子。HTML代码如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"root"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">"paragraph"</span>&gt;</span><span class="tag">&lt;/<span class="name">article</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"note"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>DOM树结构如下图所示<br><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/DOM%E6%A0%91%E7%BB%93%E6%9E%84.png" alt="DOM树结构"></p>
+<h3 id="深度优先遍历-1"><a href="#深度优先遍历-1" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printinfo</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(element.tagName + <span class="string">" "</span> + <span class="string">`<span class="subst">$&#123;element.className&#125;</span>`</span>); <span class="comment">// 打印节点类型和类名</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">  printinfo(element); <span class="comment">// 打印节点信息</span></div><div class="line">  <span class="keyword">if</span> (element.children.length &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="comment">// DOM元素列表并非真正意义上的数组，而是类数组(array-like)。因此通过Array.from()转换为数组</span></div><div class="line">    <span class="built_in">Array</span>.from(element.children).forEach(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</div><div class="line">      <span class="comment">// 递归</span></div><div class="line">      dfs(child);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">dfs(<span class="built_in">document</span>.body.querySelector(<span class="string">'.root'</span>));</div></pre></td></tr></table></figure>
+<h3 id="广度优先遍历-1"><a href="#广度优先遍历-1" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printinfo</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(element.tagName + <span class="string">" "</span> + <span class="string">`<span class="subst">$&#123;element.className&#125;</span>`</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bfs</span>(<span class="params">node</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> queue = [];</div><div class="line">  queue.push(node); <span class="comment">// 将根节点添加到队列中</span></div><div class="line">  <span class="keyword">while</span> (queue.length &gt; <span class="number">0</span>) &#123; <span class="comment">// 直到队列为空</span></div><div class="line">    <span class="keyword">var</span> element = queue.shift(); <span class="comment">// 从队列中取出第一个节点</span></div><div class="line">    printinfo(element); <span class="comment">// 打印节点信息</span></div><div class="line">    <span class="keyword">if</span> (element.children.length == <span class="number">0</span>) &#123; <span class="comment">// 如果没有子节点，就进入下一个循环</span></div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 含有子节点，则将所有子节点添加到队列中</span></div><div class="line">      <span class="built_in">Array</span>.from(element.children).forEach(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</div><div class="line">        queue.push(child);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bfs(<span class="built_in">document</span>.body.querySelector(<span class="string">'.root'</span>));</div></pre></td></tr></table></figure>
+<p>深度优先遍历(DFS)与广度优先遍历(BFS)介绍到此结束。前端也要会一点算法哈。</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/09/DFS-BFS/" title= 深度优先遍历与广度优先遍历 >
-                    <div class="nextTitle">深度优先遍历与广度优先遍历</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/03/06/Linux-Package-Install/" title= Linux软件包管理 >
-                    <div class="prevTitle">Linux软件包管理</div>
+                <a href= "/2018/03/08/height-100不起作用/" title= height:100%不起作用? >
+                    <div class="prevTitle">height:100%不起作用?</div>
                 </a>
             
         </li>
@@ -383,7 +391,7 @@ height:50vh;
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
     var gitment = new Gitment({
-        // id: "height:100%不起作用?", // 可选。默认为 location.href
+        // id: "深度优先遍历与广度优先遍历", // 可选。默认为 location.href
         owner: 'kurobanekid',
         repo: 'blog-comment',
         oauth: {
@@ -488,7 +496,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深度优先遍历"><span class="toc-number">1.</span> <span class="toc-text">深度优先遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广度优先遍历"><span class="toc-number">2.</span> <span class="toc-text">广度优先遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深度优先遍历-1"><span class="toc-number">3.1.</span> <span class="toc-text">深度优先遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广度优先遍历-1"><span class="toc-number">3.2.</span> <span class="toc-text">广度优先遍历</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
