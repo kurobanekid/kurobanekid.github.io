@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>KurobaneKid&#39;s Lab</title>
+    <title>position(定位) · KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -251,12 +251,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >KurobaneKid&#39;s Lab</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">position(定位)</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>KurobaneKid's Lab</a>
 </header>
@@ -268,79 +279,162 @@
 
 
 
-
+height:50vh;
 
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            position(定位)
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = CSS>CSS</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/03/10</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/06/Linux-Package-Install/" >
-                
-                    <span>Linux软件包管理</span>
-            </a>
-            <div class="abstract-content">
-                Linux软件包安装方式：1. 源码包安装下载源码包后，通过本地编译后进行安装
-优点
-开源。能够阅读软件包(Package)的源代码进行学习
-自由度高。通过修改软件源码进行自定义安装
-稳定性高。因为软件是通过本机编译安装。比同样软件用rpm包安装后提升大约5%，也更加稳定
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="postion属性值"><a href="#postion属性值" class="headerlink" title="postion属性值"></a>postion属性值</h2><ol>
+<li>static(默认)</li>
+<li>inherit</li>
+<li>relative</li>
+<li>absoulte</li>
+<li>fixed</li>
+</ol>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>不指定position，默认为static，忽略top、 bottom、left、right或z-index声明</p>
+<h2 id="inherit"><a href="#inherit" class="headerlink" title="inherit"></a>inherit</h2><p>从父元素继承position值  </p>
+<p>接下来主要介绍后三个属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/origin.png" alt="origin"></p>
+<h2 id="relative-相对定位"><a href="#relative-相对定位" class="headerlink" title="relative(相对定位)"></a>relative(相对定位)</h2><p>主要特点：</p>
+<ol>
+<li>不脱离文档流</li>
+<li>相对自身位置进行偏移</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: relative; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/relative.png" alt="relative相对定位"></p>
+<p>通过图片可以看到，相对定位并没有影响其他元素的位置、大小。</p>
+<h2 id="absoulte-绝对定位"><a href="#absoulte-绝对定位" class="headerlink" title="absoulte(绝对定位)"></a>absoulte(绝对定位)</h2><p>主要特点：</p>
+<ol>
+<li>脱离文档流</li>
+<li>元素宽度变为内容宽度（包裹内容）</li>
+<li>根据最近的一个定位（relative/absoulte/fixed）祖先元素进行偏移</li>
+</ol>
+<h3 id="存在已定位的祖先元素"><a href="#存在已定位的祖先元素" class="headerlink" title="存在已定位的祖先元素"></a>存在已定位的祖先元素</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"position: relative"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> &gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span> &gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: absolute; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/absolute_parent.png" alt="absolute绝对定位-存在定位祖先元素"></p>
+<p>首先可以看到目标元素已经脱离文档流，对父元素造成了破坏；<br>其次可以清楚看到目标元素的宽度已经变为内容宽度；<br>最后由于存在定位的祖先元素，因此以最近一个定位祖先元素(.container)进行偏移；</p>
+<h3 id="没有定位的祖先元素"><a href="#没有定位的祖先元素" class="headerlink" title="没有定位的祖先元素"></a>没有定位的祖先元素</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: absolute; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/absolute_window.png" alt="absolute绝对定位-无定位祖先元素"></p>
+<p>如果祖先元素都没有设置定位，那么就以视窗为参照物，进行偏移。其他与上一种情况一样。</p>
+<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><p>主要特点：</p>
+<ol>
+<li>脱离文档流</li>
+<li>元素宽度变为内容宽度（包裹内容）</li>
+<li>根据视窗(window)进行偏移</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: fixed; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/fixed.png" alt="fixed定位"></p>
+<p>可以看到它和absolute没有定位祖先元素的情况一样。</p>
 
-缺点
-安装比较大的软件时，步骤较为繁琐，有可能出错
-安装时间较长（因为需要进行编译）
-编译可能报错，对入门者并不友好
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/10/button与input-type-button区别/" title= button与input type="button"区别 >
+                    <div class="prevTitle">button与input type="button"区别</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-2. 二进制安装（rpm包/系统默认安装）软件厂商将源码包编译成二进制文件，用户直接安装就可以
-优点
-安装时间较快
-通过简单命令能够对软件进行升级、删除、修改
+<!-- City版安装代码已完成 -->
+    
+    
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "position(定位)", // 可选。默认为 location.href
+        owner: 'kurobanekid',
+        repo: 'blog-comment',
+        oauth: {
+            client_id: '0d35d3bbc9231f294b1f',
+            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
+        },
+    })
+    gitment.render('container')
 
-缺点
-自由度比源码包安装方式弱一些。...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/06</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = Linux>Linux</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -413,6 +507,22 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#postion属性值"><span class="toc-number">1.</span> <span class="toc-text">postion属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static"><span class="toc-number">2.</span> <span class="toc-text">static</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inherit"><span class="toc-number">3.</span> <span class="toc-text">inherit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#relative-相对定位"><span class="toc-number">4.</span> <span class="toc-text">relative(相对定位)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#absoulte-绝对定位"><span class="toc-number">5.</span> <span class="toc-text">absoulte(绝对定位)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存在已定位的祖先元素"><span class="toc-number">5.1.</span> <span class="toc-text">存在已定位的祖先元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#没有定位的祖先元素"><span class="toc-number">5.2.</span> <span class="toc-text">没有定位的祖先元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fixed"><span class="toc-number">6.</span> <span class="toc-text">fixed</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -615,6 +725,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
