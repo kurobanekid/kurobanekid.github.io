@@ -354,7 +354,7 @@ height:50vh;
 </li>
 <li><p>根据第一点，可以知道，当button被包含在form表单时（非IE情况），默认的type=”submit”，也就说点击它会提交所属的表单。功能上，相当于&lt; input type=”submit” /&gt;</p>
 </li>
-<li><p>由于第一点原因，IE下,button获取value将会返回”innerText”；非IE下，button获取value将会返回”attrValue”</p>
+<li><p>在表单中，IE下,button获取value将会返回”innerText”；非IE下，button获取value将会返回”attrValue”，因此建议在表单中使用input来创建按钮</p>
 </li>
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">value</span>=<span class="string">"attrValue"</span>&gt;</span> innerText <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
