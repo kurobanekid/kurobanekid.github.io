@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>position（定位） · KurobaneKid&#39;s Lab</title>
+    <title>详解background属性 · KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -265,7 +265,7 @@
                 <a href="/" >KurobaneKid&#39;s Lab</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">position（定位）</a>
+                <a href="#" class="post-name">详解background属性</a>
             </div>
     </div>
     
@@ -297,7 +297,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            position（定位）
+            详解background属性
             <!-- 404 -->
             
         </h1>
@@ -321,7 +321,7 @@ height:50vh;
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/10</span>
+                <span class="post-intro-time">2018/03/14</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -350,64 +350,136 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="postion属性值"><a href="#postion属性值" class="headerlink" title="postion属性值"></a>postion属性值</h2><ul>
-<li>static(默认)</li>
-<li>inherit</li>
-<li>relative</li>
-<li>absolute</li>
-<li>fixed</li>
+        <p>本文主要对background的各个“小”属性进行讲解。</p>
+<h2 id="background-color"><a href="#background-color" class="headerlink" title="background-color"></a>background-color</h2><p>背景颜色默认是<code>transparent</code>（透明）。可以通过十六进制、rgb/rgba、hsl/hsla设置背景颜色</p>
+<p>rgb</p>
+<ul>
+<li>r: red(0-255)</li>
+<li>g: green(0-255)</li>
+<li>b: blue(0-255)</li>
+<li>a: alpha(0-1)透明度，数值越小，透明度越高</li>
 </ul>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>不指定position，默认为static，忽略top、 bottom、left、right或z-index声明</p>
-<h2 id="inherit"><a href="#inherit" class="headerlink" title="inherit"></a>inherit</h2><p>从父元素继承position值  </p>
-<p>接下来主要介绍后三个属性</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/origin.png" alt="origin"></p>
-<h2 id="relative-相对定位"><a href="#relative-相对定位" class="headerlink" title="relative(相对定位)"></a>relative(相对定位)</h2><p>主要特点：</p>
+<p>十六进制表示，实质是将rgb十进制转换为十六进制。e.g rgb(0,255,0) =&gt; #00ff00 =&gt; #0f0</p>
+<ul>
+<li>h: 色相(0-360) 0/360表示红色,120表示绿色,240表示蓝色</li>
+<li>s: 饱和度(0%-100%)</li>
+<li>l: 明度(0%-100%)</li>
+<li>a: 透明度(0-1)，数值越小，透明度越高</li>
+</ul>
+<h2 id="background-image"><a href="#background-image" class="headerlink" title="background-image"></a>background-image</h2><p><code>url(&quot;../path/target.jpg&quot;)</code></p>
+<p>设置多个url（用逗号分隔）表示引入多个背景图片，这些图片的图层按顺序递减，即第一个在最上层。</p>
+<p><strong><code>background-color</code>背景颜色在最底层，即在所有的背景图片之下</strong></p>
+<h2 id="background-repeat"><a href="#background-repeat" class="headerlink" title="background-repeat"></a>background-repeat</h2><ul>
+<li><code>repeat</code>(默认), 表示背景图片将在X轴以及Y轴上进行重复<ul>
+<li><code>repeatX</code>, 表示背景图片只在X轴上进行重复</li>
+<li><code>repeatY</code>, 表示背景图片只在Y轴上进行重复</li>
+</ul>
+</li>
+<li><code>round</code>, 尽可能重复，第一个以及最后一个背景图片将固定在元素相应的边上，同时空白将均匀分布在图像之间</li>
+<li><code>space</code>, 随着允许的空间在尺寸上的增长, 被重复的背景图片将会被<strong>伸展(不留空隙)</strong>, 直到有足够的空间来添加下一个图片。当下一个图片被添加后, 所有的当前的图片会被压缩来腾出空间</li>
+<li><code>no-repeat</code>，背景图片不会被重复</li>
+</ul>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-repeat.png" alt="background-repeat"></p>
+<h2 id="background-attachment"><a href="#background-attachment" class="headerlink" title="background-attachment"></a>background-attachment</h2><p>指定背景图片是在视口中固定的还是随包含它的区块滚动的</p>
+<ul>
+<li><code>scroll</code>(默认)，表示背景相对于<strong>元素本身固定</strong>，<strong>背景并不随元素的内容滚动</strong></li>
+<li><code>local</code>，表示背景相对于<strong>元素的内容固定</strong>。如果一个元素拥有滚动机制，<strong>背景将会随着元素的内容滚动</strong></li>
+<li><code>fixed</code>，表示背景相对于视口固定。即使一个元素拥有滚动机制，背景也不会随着元素的内容滚动（较少使用）</li>
+</ul>
+<p>下面gif图的演示按上面介绍的关键字顺序排列</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-attachment.gif" alt="background-attachment"></p>
+<h2 id="background-position"><a href="#background-position" class="headerlink" title="background-position"></a>background-position</h2><p>指定背景图片的初始位置</p>
+<p>写法1:</p>
+<p>\<position> = [ left | center | right | top | bottom | \<length> | \<percentage>]<br>一个值 =&gt; 关键字或长度或百分比，表示X轴位置，这是Y轴默认为<code>center</code></percentage></length></position></p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_1.png" alt="position_1"></p>
+<p>写法2:</p>
+<p>\<position> = [ left | center | right | \<length> | \<percentage>]   [ top | center | bottom | \<length> | \<percentage>]<br>两个值 =&gt; 第一个值表示X轴位置，第二个值表示Y轴位置</percentage></length></percentage></length></position></p>
+<p><strong>百分比需要注意</strong></p>
+<p><code>background-position: 30% 50%;</code> 表示背景图片(30%,50%)的点与背景参照区域(30%,50%)的点重合。如下图所示</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-position.png" alt="background-position百分比"></p>
+<p>写法3:</p>
+<p>\<position> = [ center | [ left | right ] [ \<length> | \<percentage> ] ?]    [ center | [ top | bottom ] [ \<length> | \<percentage> ] ?]</percentage></length></percentage></length></position></p>
+<p>四个值 =&gt; 第一个和第三个关键字表示参照目标，第二个和第四个数值表示相对参照目标的偏移量</p>
+<p><code>background-position: left 100px top 50px</code>，表示背景图片相对<em>背景参照区域</em>(接下来会介绍)左边偏移100px,上边偏移50px</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_4.png" alt="position_4"></p>
+<p>一般为减少页面的http请求次数，通常会将一些图标、小图片合成在同一张图片上[雪碧(spite)图]，通过background-position对雪碧图进行偏移获取目标图片。</p>
+<h2 id="background-origin"><a href="#background-origin" class="headerlink" title="background-origin"></a>background-origin</h2><p>指定背景图片原点位置的背景参照区域</p>
+<ul>
+<li><code>border-box</code>(默认)，边框区</li>
+<li><code>padding-box</code>，内边距区</li>
+<li><code>content-box</code>，内容区</li>
+</ul>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-origin.png" alt="background-origin"></p>
+<h2 id="background-clip"><a href="#background-clip" class="headerlink" title="background-clip"></a>background-clip</h2><p>背景（图片或颜色）裁剪</p>
+<ul>
+<li><code>border-box</code>(默认), 背景延伸到边框外沿, 但是边框绘制在”元素的背景之上”（背景被边框覆盖，边框在上层，背景在下层）</li>
+<li><code>padding-box</code>, 背景裁剪到内边距外沿</li>
+<li><code>content-box</code>, 背景裁剪到内容区外沿</li>
+</ul>
+<p><code>Tip</code>:</p>
+<p>默认情况下内边距会承载背景图片或背景颜色（边框也会，因为background-origin默认是border-box）。很多时候我们希望背景只延伸到内容区，这时可以将该属性设置为<code>content-box</code>达到目的。<br><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/clip_content-box.png" alt="background-clip:content-box"></p>
+<h2 id="background-size"><a href="#background-size" class="headerlink" title="background-size"></a>background-size</h2><p>设置背景图片大小</p>
+<p>\<bg-size> = [\<length> | \<percentage>| auto ] {1,2} | cover | contain</percentage></length></bg-size></p>
+<ul>
+<li><code>auto</code>(默认)，以背景图片的比例缩放背景图片</li>
+<li><code>cover</code>，背景图片尽可能小，但宽度以及高度都不能小于背景参照区域</li>
+<li><code>contain</code>，背景图片尽可能大，但宽度以及高度都不能大于背景参照区域</li>
+</ul>
+<p>除了关键字以外，还能通过长度或者百分比进行设置，其中需要注意的是<strong>百分比是相对背景参照区域计算，而并非自身</strong></p>
+<ul>
+<li>一个值: 这个值指定图片的宽度，图片的高度隐式的为auto，即高度根据指定宽度进行等比例缩放</li>
+<li>两个值: 第一个值为图片宽度，第二个值为图片高度</li>
+<li>逗号分隔的多个值: 设置多重背景</li>
+</ul>
+<h2 id="linear-gradient"><a href="#linear-gradient" class="headerlink" title="linear-gradient()"></a>linear-gradient()</h2><p>线性渐变，<code>background-image</code>其中一种表示方法，并非是属性</p>
+<p>linear-gradient = [ [ \<angle> | to \<side-or-corner> , ] ]  ? \<color-stop>[,<color-stop>]</color-stop></color-stop></side-or-corner></angle></p>
+<p>\<side-or-corner> = [left | right] || [ top | bottom ]</side-or-corner></p>
+<p>例如</p>
+<ul>
+<li>to left 从右到左</li>
+<li>to top 从下到上</li>
+<li>to right top 从左下角到右上角</li>
+</ul>
+<p>\<color-stop> = \<color> [\<percentage> | \<length>] ?</length></percentage></color></color-stop></p>
+<p>例子</p>
+<p>linear-gradient(red, green) === linear-gradient(red 0, green 100%)<br><code>to \&lt;side-or-corner&gt;</code> 默认为<code>to bottom</code>, 所以颜色由上到下渐变（红-&gt;绿），并且存在两个颜色值，那么相当于第一个为0%，第二个为100%。所以三个颜色值(red , green, blue) === (red 0, green 50%, blue 100%)</p>
+<p>linear-gradient(135deg, red, green) =&gt; 135度方向，进行线性渐变</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/angle.png" alt="线性渐变角度"></p>
+<p>linear-gradient(135deg, red 20%, green 50%);<br>20%的位置为红色，50%的位置为绿色。实际上20%前面都是红色，50%后面都是绿色，存在渐变的地方是20%-50%;</p>
+<p><em>这里的百分比的参照是什么呢？</em> =&gt; 指定角度方向上的直线与元素相交构成的线段长度</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98%E7%99%BE%E5%88%86%E6%AF%94.png" alt="线性渐变百分比"></p>
+<h2 id="radial-gradient"><a href="#radial-gradient" class="headerlink" title="radial-gradient()"></a>radial-gradient()</h2><p>径向渐变，<code>background-image</code>其中一种表示方法，并非是属性</p>
+<p>第一种写法：</p>
+<p>[ circle || \<length> ] [ at \<position>]   |<br>[ ellipse || [\<length> | \<percentage> ] { 2 } ] [ at \<position> ]  <strong><code>? ,</code></strong><br> \<color-stop> [ , \<color-stop> ]+</color-stop></color-stop></position></percentage></length></position></length></p>
+<p><em>通过对比可以看出，椭圆比圆多了一个参数 \<percentage>{2}，其中{2}是因为圆只要指定半径就能确定圆的大小，而椭圆则需要指定X轴半径与Y轴半径长度才能确定椭圆大小，此外除了可以用length表示长度，还可以使用百分比表示，其中百分比是相对背景参照区域大小而言</percentage></em></p>
+<p><code>radial-gradient(circle 50px at 10px 20px, red, blue)</code> 圆形-半径50px-圆心在(10px,20px) - 从红色渐变到蓝色，省略百分比的默认情况与线性渐变一样（0=&gt;100%）</p>
+<p><code>radial-gradient(ellipse 100px 50px, red, blue)</code> 椭圆 - X轴半径100px,Y轴半径50px - 圆点在背景参照区域中点（没有指定，默认元素中点，圆的情况也一样）- 从红色渐变到蓝色</p>
+<p>第二中写法</p>
+<p>通过\<extent-keyword>指定圆/椭圆的大小</extent-keyword></p>
+<p>[ [ circle | ellipse ] || \<extent-keyword> ] [at \<position>] ? , | at \<position> , | at \<position> ] <strong><code>? ,</code></strong><br>\<color-stop> [ , \<color-stop> ]+</color-stop></color-stop></position></position></position></extent-keyword></p>
+<p>\<extent-keyword> = closest-side | farthest-side | closest-corner | farthest-corner(默认)<br>依次是 最近的边 | 最远的边 | 最近的角 | 最远的角，它们都是将圆点作为参照点</extent-keyword></p>
+<p><code>radial-gradient(circle, red, blue)</code> 圆形 - 半径为[ 圆点到最远的角 ]的距离 - 圆点在背景参照区域中点 - 从红色渐变到蓝色</p>
+<p><code>radial-gradient(ellipse, red, blue)</code> 椭圆 - 圆点在背景参照区域中点 - 从红色渐变到蓝色<br>缺省extent-keyword，同样默认是farthest-corner，但是椭圆有些复杂。</p>
 <ol>
-<li>不脱离文档流</li>
-<li>相对自身位置进行偏移</li>
+<li>椭圆经过 [最远的角] 的点</li>
+<li>椭圆X轴半径 / Y轴半径  =  X轴closest-side / Y轴closest-side</li>
 </ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: relative; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/relative.png" alt="relative相对定位"></p>
-<p>通过图片可以看到，相对定位并没有影响其他元素的位置、大小。</p>
-<h2 id="absolute-绝对定位"><a href="#absolute-绝对定位" class="headerlink" title="absolute(绝对定位)"></a>absolute(绝对定位)</h2><p>主要特点：</p>
-<ol>
-<li>脱离文档流</li>
-<li>元素宽度变为内容宽度（包裹内容）a</li>
-<li>根据最近的一个定位（relative/absolute/fixed）祖先元素进行偏移</li>
-</ol>
-<h3 id="存在已定位的祖先元素"><a href="#存在已定位的祖先元素" class="headerlink" title="存在已定位的祖先元素"></a>存在已定位的祖先元素</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"position: relative"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: absolute; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/absolute_parent.png" alt="absolute绝对定位-存在定位祖先元素"></p>
-<p>首先可以看到目标元素已经脱离文档流，对父元素造成了破坏；<br>其次可以清楚看到目标元素的宽度已经变为内容宽度；<br>最后由于存在定位的祖先元素，因此以最近一个定位祖先元素(.container)进行偏移；</p>
-<h3 id="没有定位的祖先元素"><a href="#没有定位的祖先元素" class="headerlink" title="没有定位的祖先元素"></a>没有定位的祖先元素</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: absolute; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/absolute_window.png" alt="absolute绝对定位-无定位祖先元素"></p>
-<p>如果祖先元素都没有设置定位，那么就以视窗为参照物，进行偏移。其他与上一种情况一样。</p>
-<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><p>主要特点：</p>
-<ol>
-<li>脱离文档流</li>
-<li>元素宽度变为内容宽度（包裹内容）</li>
-<li>根据视窗(window)进行偏移</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第一段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第二段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"position: fixed; left: 10px; top: 10px"</span>&gt;</span>第三段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>第四段<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><img src="http://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/position/fixed.png" alt="fixed定位"></p>
-<p>可以看到它和absolute没有定位祖先元素的情况一样。</p>
+<p>以上两点可唯一确定一个椭圆</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/ellipse.png" alt="椭圆farthest-corner"></p>
+<p>以上就是background的所有属性，终于写完了😂</p>
+<p><strong>🙄未经作者许可，不可转载🙄</strong></p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/10/居中布局/" title= 居中布局 >
-                    <div class="nextTitle">居中布局</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/03/10/button与input-type-button区别/" title= button与input type="button"区别 >
-                    <div class="prevTitle">button与input type="button"区别</div>
+                <a href= "/2018/03/11/多列布局/" title= 多列布局 >
+                    <div class="prevTitle">多列布局</div>
                 </a>
             
         </li>
@@ -423,7 +495,7 @@ height:50vh;
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
     var gitment = new Gitment({
-        // id: "position（定位）", // 可选。默认为 location.href
+        // id: "详解background属性", // 可选。默认为 location.href
         owner: 'kurobanekid',
         repo: 'blog-comment',
         oauth: {
@@ -530,7 +602,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#postion属性值"><span class="toc-number">1.</span> <span class="toc-text">postion属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static"><span class="toc-number">2.</span> <span class="toc-text">static</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inherit"><span class="toc-number">3.</span> <span class="toc-text">inherit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#relative-相对定位"><span class="toc-number">4.</span> <span class="toc-text">relative(相对定位)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#absolute-绝对定位"><span class="toc-number">5.</span> <span class="toc-text">absolute(绝对定位)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存在已定位的祖先元素"><span class="toc-number">5.1.</span> <span class="toc-text">存在已定位的祖先元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#没有定位的祖先元素"><span class="toc-number">5.2.</span> <span class="toc-text">没有定位的祖先元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fixed"><span class="toc-number">6.</span> <span class="toc-text">fixed</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background-color"><span class="toc-number">1.</span> <span class="toc-text">background-color</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image"><span class="toc-number">2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-repeat"><span class="toc-number">3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-attachment"><span class="toc-number">4.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-position"><span class="toc-number">5.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">6.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">7.</span> <span class="toc-text">background-clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size"><span class="toc-number">8.</span> <span class="toc-text">background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-number">9.</span> <span class="toc-text">linear-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-number">10.</span> <span class="toc-text">radial-gradient()</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
