@@ -374,8 +374,8 @@ height:50vh;
 <li><code>repeatY</code>, 表示背景图片只在Y轴上进行重复</li>
 </ul>
 </li>
-<li><code>round</code>, 尽可能重复，第一个以及最后一个背景图片将固定在元素相应的边上，同时空白将均匀分布在图像之间</li>
-<li><code>space</code>, 随着允许的空间在尺寸上的增长, 被重复的背景图片将会被<strong>伸展(不留空隙)</strong>, 直到有足够的空间来添加下一个图片。当下一个图片被添加后, 所有的当前的图片会被压缩来腾出空间</li>
+<li><code>space</code>, 尽可能重复，第一个以及最后一个背景图片将固定在元素相应的边上，同时空白将均匀分布在图像之间</li>
+<li><code>round</code>, 随着允许的空间在尺寸上的增长, 被重复的背景图片将会被<strong>伸展(不留空隙)</strong>, 直到有足够的空间来添加下一个图片。当下一个图片被添加后, 所有的当前的图片会被压缩来腾出空间</li>
 <li><code>no-repeat</code>，背景图片不会被重复</li>
 </ul>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-repeat.png" alt="background-repeat"></p>
@@ -387,7 +387,7 @@ height:50vh;
 </ul>
 <p>下面gif图的演示按上面介绍的关键字顺序排列</p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-attachment.gif" alt="background-attachment"></p>
-<h2 id="background-position"><a href="#background-position" class="headerlink" title="background-position"></a>background-position</h2><p>指定背景图片的初始位置</p>
+<h2 id="background-position"><a href="#background-position" class="headerlink" title="background-position"></a>background-position</h2><p>指定背景图片的初始位置, <em>默认初始位置为原点(0,0)，即背景参照区域的左上角</em></p>
 <p>写法1:</p>
 <p>&lt;position&gt; = [ left | center | right | top | bottom | &lt;length&gt; | &lt;percentage&gt;]<br>一个值 =&gt; 关键字或长度或百分比，表示X轴位置，这是Y轴默认为<code>center</code></p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_1.png" alt="position_1"></p>
@@ -465,8 +465,14 @@ height:50vh;
 </ol>
 <p>以上两点可唯一确定一个椭圆</p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/ellipse.png" alt="椭圆farthest-corner"></p>
-<p>以上就是background的所有属性，终于写完了😂</p>
-<p><strong>🙄未经作者许可，不可转载🙄</strong></p>
+<h2 id="background缩写"><a href="#background缩写" class="headerlink" title="background缩写"></a>background缩写</h2><p>为书写方便，将background缩写为bg</p>
+<p>background = [ &lt;bg-layer&gt; , ] * &lt;final-bg-layer&gt;<br>（总式）: 背景可由多个背景层组成，最后一层为final-bg-layer（最后一层背景层）</p>
+<p>&lt;bg-layer&gt; = &lt;bg-image&gt; || &lt;position&gt; [ / &lt;bg-size&gt;]? || &lt;repeat-style&gt; || &lt;attachment&gt; || &lt;box&gt; || &lt;box&gt;<br>（除去最后一层以外的背景层）: 当<code>position</code>与<code>bg-size</code>都需要进行设置的时候，两者会有冲突，因此在两者之间需要添加 <strong>/</strong> 。最后有两个box，第一个是指<code>bg-orgin</code>的box值,第二个是<code>bg-clip</code>的box值，如果只有一个box值，那么该值同时作为bg-origin与bg-clip的值</p>
+<p>&lt;final-bg-layer&gt; = &lt;bg-layer&gt; || &lt;’background-color’&gt;<br>（最后一层背景层）: 唯一不同的地方是多了一个指定<code>background-color</code>选项。即如果要为背景指定背景颜色，那么需要放到最后一层背景层的最后一个参数位置进行设置</p>
+<p><code>background: url(green.png) 0 0 / 20px 20px no-repeat , url(red.png) 50% 50% / contain no-repeat content-box #4285F4;</code></p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/background_simple.png" alt="background简写"></p>
+<p>以上就是background的所有介绍，终于写完了😂</p>
+<p><strong>😬未经作者许可，不可转载😬</strong></p>
 
     </article>
     <!-- 前后页  -->
@@ -601,7 +607,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background-color"><span class="toc-number">1.</span> <span class="toc-text">background-color</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rgb"><span class="toc-number">1.1.</span> <span class="toc-text">rgb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十六进制"><span class="toc-number">1.2.</span> <span class="toc-text">十六进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hsl"><span class="toc-number">1.3.</span> <span class="toc-text">hsl</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image"><span class="toc-number">2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-repeat"><span class="toc-number">3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-attachment"><span class="toc-number">4.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-position"><span class="toc-number">5.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">6.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">7.</span> <span class="toc-text">background-clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size"><span class="toc-number">8.</span> <span class="toc-text">background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-number">9.</span> <span class="toc-text">linear-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-number">10.</span> <span class="toc-text">radial-gradient()</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background-color"><span class="toc-number">1.</span> <span class="toc-text">background-color</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rgb"><span class="toc-number">1.1.</span> <span class="toc-text">rgb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十六进制"><span class="toc-number">1.2.</span> <span class="toc-text">十六进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hsl"><span class="toc-number">1.3.</span> <span class="toc-text">hsl</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image"><span class="toc-number">2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-repeat"><span class="toc-number">3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-attachment"><span class="toc-number">4.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-position"><span class="toc-number">5.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">6.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">7.</span> <span class="toc-text">background-clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size"><span class="toc-number">8.</span> <span class="toc-text">background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-number">9.</span> <span class="toc-text">linear-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-number">10.</span> <span class="toc-text">radial-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background缩写"><span class="toc-number">11.</span> <span class="toc-text">background缩写</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
