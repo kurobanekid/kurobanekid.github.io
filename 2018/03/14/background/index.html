@@ -352,15 +352,14 @@ height:50vh;
     <article class="article-entry">
         <p>本文主要对background的各个“小”属性进行讲解。</p>
 <h2 id="background-color"><a href="#background-color" class="headerlink" title="background-color"></a>background-color</h2><p>背景颜色默认是<code>transparent</code>（透明）。可以通过十六进制、rgb/rgba、hsl/hsla设置背景颜色</p>
-<p>rgb</p>
-<ul>
+<h3 id="rgb"><a href="#rgb" class="headerlink" title="rgb"></a>rgb</h3><ul>
 <li>r: red(0-255)</li>
 <li>g: green(0-255)</li>
 <li>b: blue(0-255)</li>
 <li>a: alpha(0-1)透明度，数值越小，透明度越高</li>
 </ul>
-<p>十六进制表示，实质是将rgb十进制转换为十六进制。e.g rgb(0,255,0) =&gt; #00ff00 =&gt; #0f0</p>
-<ul>
+<h3 id="十六进制"><a href="#十六进制" class="headerlink" title="十六进制"></a>十六进制</h3><p>实质是将rgb十进制转换为十六进制。e.g rgb(0,255,0) (0=&gt;00,255=&gt;ff,0=&gt;00) ===&gt;&gt; #00ff00 =&gt; #0f0</p>
+<h3 id="hsl"><a href="#hsl" class="headerlink" title="hsl"></a>hsl</h3><ul>
 <li>h: 色相(0-360) 0/360表示红色,120表示绿色,240表示蓝色</li>
 <li>s: 饱和度(0%-100%)</li>
 <li>l: 明度(0%-100%)</li>
@@ -390,15 +389,15 @@ height:50vh;
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-attachment.gif" alt="background-attachment"></p>
 <h2 id="background-position"><a href="#background-position" class="headerlink" title="background-position"></a>background-position</h2><p>指定背景图片的初始位置</p>
 <p>写法1:</p>
-<p>\<position> = [ left | center | right | top | bottom | \<length> | \<percentage>]<br>一个值 =&gt; 关键字或长度或百分比，表示X轴位置，这是Y轴默认为<code>center</code></percentage></length></position></p>
+<p>&lt;position&gt; = [ left | center | right | top | bottom | &lt;length&gt; | &lt;percentage&gt;]<br>一个值 =&gt; 关键字或长度或百分比，表示X轴位置，这是Y轴默认为<code>center</code></p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_1.png" alt="position_1"></p>
 <p>写法2:</p>
-<p>\<position> = [ left | center | right | \<length> | \<percentage>]   [ top | center | bottom | \<length> | \<percentage>]<br>两个值 =&gt; 第一个值表示X轴位置，第二个值表示Y轴位置</percentage></length></percentage></length></position></p>
+<p>&lt;position&gt; = [ left | center | right | &lt;length&gt; | &lt;percentage&gt;]   [ top | center | bottom | &lt;length&gt; | &lt;percentage&gt;]<br>两个值 =&gt; 第一个值表示X轴位置，第二个值表示Y轴位置</p>
 <p><strong>百分比需要注意</strong></p>
 <p><code>background-position: 30% 50%;</code> 表示背景图片(30%,50%)的点与背景参照区域(30%,50%)的点重合。如下图所示</p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-position.png" alt="background-position百分比"></p>
 <p>写法3:</p>
-<p>\<position> = [ center | [ left | right ] [ \<length> | \<percentage> ] ?]    [ center | [ top | bottom ] [ \<length> | \<percentage> ] ?]</percentage></length></percentage></length></position></p>
+<p>&lt;position&gt; = [ center | [ left | right ] [ &lt;length&gt; | &lt;percentage&gt; ] ?]    [ center | [ top | bottom ] [ &lt;length&gt; | &lt;percentage&gt; ] ?]</p>
 <p>四个值 =&gt; 第一个和第三个关键字表示参照目标，第二个和第四个数值表示相对参照目标的偏移量</p>
 <p><code>background-position: left 100px top 50px</code>，表示背景图片相对<em>背景参照区域</em>(接下来会介绍)左边偏移100px,上边偏移50px</p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_4.png" alt="position_4"></p>
@@ -419,7 +418,7 @@ height:50vh;
 <p><code>Tip</code>:</p>
 <p>默认情况下内边距会承载背景图片或背景颜色（边框也会，因为background-origin默认是border-box）。很多时候我们希望背景只延伸到内容区，这时可以将该属性设置为<code>content-box</code>达到目的。<br><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/clip_content-box.png" alt="background-clip:content-box"></p>
 <h2 id="background-size"><a href="#background-size" class="headerlink" title="background-size"></a>background-size</h2><p>设置背景图片大小</p>
-<p>\<bg-size> = [\<length> | \<percentage>| auto ] {1,2} | cover | contain</percentage></length></bg-size></p>
+<p>&lt;bg-size&gt; = [&lt;length&gt; | &lt;percentage&gt;| auto ] {1,2} | cover | contain</p>
 <ul>
 <li><code>auto</code>(默认)，以背景图片的比例缩放背景图片</li>
 <li><code>cover</code>，背景图片尽可能小，但宽度以及高度都不能小于背景参照区域</li>
@@ -432,17 +431,17 @@ height:50vh;
 <li>逗号分隔的多个值: 设置多重背景</li>
 </ul>
 <h2 id="linear-gradient"><a href="#linear-gradient" class="headerlink" title="linear-gradient()"></a>linear-gradient()</h2><p>线性渐变，<code>background-image</code>其中一种表示方法，并非是属性</p>
-<p>linear-gradient = [ [ \<angle> | to \<side-or-corner> , ] ]  ? \<color-stop>[,<color-stop>]</color-stop></color-stop></side-or-corner></angle></p>
-<p>\<side-or-corner> = [left | right] || [ top | bottom ]</side-or-corner></p>
+<p>linear-gradient = [ [ &lt;angle&gt; | to &lt;side-or-corner&gt; , ] ]  ? &lt;color-stop&gt;[,&lt;color-stop&gt;]</p>
+<p>&lt;side-or-corner&gt; = [left | right] || [ top | bottom ]</p>
 <p>例如</p>
 <ul>
 <li>to left 从右到左</li>
 <li>to top 从下到上</li>
 <li>to right top 从左下角到右上角</li>
 </ul>
-<p>\<color-stop> = \<color> [\<percentage> | \<length>] ?</length></percentage></color></color-stop></p>
+<p>&lt;color-stop&gt; = &lt;color&gt; [&lt;percentage&gt; | &lt;length&gt;] ?</p>
 <p>例子</p>
-<p>linear-gradient(red, green) === linear-gradient(red 0, green 100%)<br><code>to \&lt;side-or-corner&gt;</code> 默认为<code>to bottom</code>, 所以颜色由上到下渐变（红-&gt;绿），并且存在两个颜色值，那么相当于第一个为0%，第二个为100%。所以三个颜色值(red , green, blue) === (red 0, green 50%, blue 100%)</p>
+<p>linear-gradient(red, green) === linear-gradient(red 0, green 100%)&nbsp;&nbsp;<br><code>to &lt;side-or-corner&gt;</code> 默认为<code>to bottom</code>, 所以颜色由上到下渐变（红-&gt;绿），并且存在两个颜色值，那么相当于第一个为0%，第二个为100%。所以三个颜色值(red , green, blue) === (red 0, green 50%, blue 100%)</p>
 <p>linear-gradient(135deg, red, green) =&gt; 135度方向，进行线性渐变</p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/angle.png" alt="线性渐变角度"></p>
 <p>linear-gradient(135deg, red 20%, green 50%);<br>20%的位置为红色，50%的位置为绿色。实际上20%前面都是红色，50%后面都是绿色，存在渐变的地方是20%-50%;</p>
@@ -450,14 +449,14 @@ height:50vh;
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98%E7%99%BE%E5%88%86%E6%AF%94.png" alt="线性渐变百分比"></p>
 <h2 id="radial-gradient"><a href="#radial-gradient" class="headerlink" title="radial-gradient()"></a>radial-gradient()</h2><p>径向渐变，<code>background-image</code>其中一种表示方法，并非是属性</p>
 <p>第一种写法：</p>
-<p>[ circle || \<length> ] [ at \<position>]   |<br>[ ellipse || [\<length> | \<percentage> ] { 2 } ] [ at \<position> ]  <strong><code>? ,</code></strong><br> \<color-stop> [ , \<color-stop> ]+</color-stop></color-stop></position></percentage></length></position></length></p>
-<p><em>通过对比可以看出，椭圆比圆多了一个参数 \<percentage>{2}，其中{2}是因为圆只要指定半径就能确定圆的大小，而椭圆则需要指定X轴半径与Y轴半径长度才能确定椭圆大小，此外除了可以用length表示长度，还可以使用百分比表示，其中百分比是相对背景参照区域大小而言</percentage></em></p>
+<p>[ circle || &lt;length&gt; ] [ at &lt;position&gt;]   |<br>[ ellipse || [&lt;length&gt; | &lt;percentage&gt; ] { 2 } ] [ at &lt;position&gt; ]  <strong><code>? ,</code></strong><br>&lt;color-stop&gt; [ , &lt;color-stop&gt; ]+</p>
+<p><em>通过对比可以看出，椭圆比圆多了一个参数 &lt;percentage&gt;{2}，其中{2}是因为圆只要指定半径就能确定圆的大小，而椭圆则需要指定X轴半径与Y轴半径长度才能确定椭圆大小，此外除了可以用length表示长度，还可以使用百分比表示，其中百分比是相对背景参照区域大小而言</em></p>
 <p><code>radial-gradient(circle 50px at 10px 20px, red, blue)</code> 圆形-半径50px-圆心在(10px,20px) - 从红色渐变到蓝色，省略百分比的默认情况与线性渐变一样（0=&gt;100%）</p>
 <p><code>radial-gradient(ellipse 100px 50px, red, blue)</code> 椭圆 - X轴半径100px,Y轴半径50px - 圆点在背景参照区域中点（没有指定，默认元素中点，圆的情况也一样）- 从红色渐变到蓝色</p>
 <p>第二中写法</p>
-<p>通过\<extent-keyword>指定圆/椭圆的大小</extent-keyword></p>
-<p>[ [ circle | ellipse ] || \<extent-keyword> ] [at \<position>] ? , | at \<position> , | at \<position> ] <strong><code>? ,</code></strong><br>\<color-stop> [ , \<color-stop> ]+</color-stop></color-stop></position></position></position></extent-keyword></p>
-<p>\<extent-keyword> = closest-side | farthest-side | closest-corner | farthest-corner(默认)<br>依次是 最近的边 | 最远的边 | 最近的角 | 最远的角，它们都是将圆点作为参照点</extent-keyword></p>
+<p>通过&lt;extent-keyword&gt;指定圆/椭圆的大小</p>
+<p>[ [ circle | ellipse ] || &lt;extent-keyword&gt; ] [at &lt;position&gt;] ? , | at &lt;position&gt; , | at &lt;position&gt; ] <strong><code>? ,</code></strong><br>&lt;color-stop&gt; [ , &lt;color-stop&gt; ]+</p>
+<p>&lt;extent-keyword&gt; = closest-side | farthest-side | closest-corner | farthest-corner(默认)<br>依次是 最近的边 | 最远的边 | 最近的角 | 最远的角，它们都是将圆点作为参照点</p>
 <p><code>radial-gradient(circle, red, blue)</code> 圆形 - 半径为[ 圆点到最远的角 ]的距离 - 圆点在背景参照区域中点 - 从红色渐变到蓝色</p>
 <p><code>radial-gradient(ellipse, red, blue)</code> 椭圆 - 圆点在背景参照区域中点 - 从红色渐变到蓝色<br>缺省extent-keyword，同样默认是farthest-corner，但是椭圆有些复杂。</p>
 <ol>
@@ -602,7 +601,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background-color"><span class="toc-number">1.</span> <span class="toc-text">background-color</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image"><span class="toc-number">2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-repeat"><span class="toc-number">3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-attachment"><span class="toc-number">4.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-position"><span class="toc-number">5.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">6.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">7.</span> <span class="toc-text">background-clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size"><span class="toc-number">8.</span> <span class="toc-text">background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-number">9.</span> <span class="toc-text">linear-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-number">10.</span> <span class="toc-text">radial-gradient()</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background-color"><span class="toc-number">1.</span> <span class="toc-text">background-color</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rgb"><span class="toc-number">1.1.</span> <span class="toc-text">rgb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十六进制"><span class="toc-number">1.2.</span> <span class="toc-text">十六进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hsl"><span class="toc-number">1.3.</span> <span class="toc-text">hsl</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image"><span class="toc-number">2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-repeat"><span class="toc-number">3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-attachment"><span class="toc-number">4.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-position"><span class="toc-number">5.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">6.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">7.</span> <span class="toc-text">background-clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size"><span class="toc-number">8.</span> <span class="toc-text">background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-number">9.</span> <span class="toc-text">linear-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-number">10.</span> <span class="toc-text">radial-gradient()</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
