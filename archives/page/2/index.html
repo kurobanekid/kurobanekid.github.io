@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>About Me · KurobaneKid&#39;s Lab</title>
+    <title>KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -253,8 +253,6 @@
 </head>
 
     
-        <body class="about-body">
-    
     
 <header class="header">
 
@@ -274,22 +272,16 @@
 
 
 
-height:50vh;
-
 >
     
     <!-- 主页  -->
-    
-    
             
-    <div class="site-intro-img" style="background-image: url(/intro/about-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            About Me
             
         </h1>
         <!-- 副标题 -->
@@ -304,16 +296,48 @@ height:50vh;
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <!-- 不可以删除，否则会调用post的layout  -->
-<main class="main about-page">
-    <article class="article-entry">
-        <p>哈哈，欢迎来查阅我😃</p>
-<p>博主👦，大三前端gou一鸣，就读📍广东工业大学软件工程系</p>
-<p>入前端坑已1.5年，会Web三大法宝，会用Bootstrap，jQuery</p>
-<p>使用过NodeJS写过几个练手项目</p>
-<p>望求一份前端实习，有合适岗位求联系（kurobanekid@qq.com）</p>
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2017/10/15/extends/" >
+                
+                    <span>JS继承</span>
+            </a>
+            <div class="abstract-content">
+                继承实现的实质是重写原型对象。为的是提高代码的复用性。JS中的继承主要通过原型去实现继承，由于JS的函数没有像Java函数的函数签名，因此JS并不能实现接口继承，只能通过原型去实现继承。
+开始前我们需要明白原型对象，构造函数，实例三者关系，搞懂了三者关系，下面的继承实现方式就更加易懂 :-)
 
-    </article>
+
+每个构造函数都有一个原型对象。
+每个原型对象都有一个指针（constructor属性）指向构造函数。
+而每个实例内部都有一个指针指向原型对象。
+
+拷贝继承123456789function copyExtend(sourceObj, targetObj) &#123;    for(var ke...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/15</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </nav>
+    
 </main>
             <!-- profile -->
             

@@ -316,6 +316,34 @@ height:50vh;
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/22/Promise轻松入门/" >
+                
+                    <span>Promise轻松入门</span>
+            </a>
+            <div class="abstract-content">
+                Promise是ES6引入的一种异步编程解决方案，遵循Promise A+标准，它是一个对象，你可以把它看成是“承诺”或“保证”，因为它真得做到了保证承诺😏。
+异步，可以简单理解为有些操作现在做，有些则留到将来做
+1234567891011function fn(yp)&#123;  setTimeOut(function() &#123;    yp('搞事情'); // 大约1秒后（将来）调用yp()出来搞事情  &#125;, 1000);&#125;fn(function(msg) &#123;  console.log(msg);&#125;);console.log('现在...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/22</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/03/14/background/" >
                 
                     <span>详解background属性</span>
@@ -607,41 +635,11 @@ IE下，button默认type=”bu...
             </div>
         </article>
     
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/10/15/extends/" >
-                
-                    <span>JS继承</span>
-            </a>
-            <div class="abstract-content">
-                继承实现的实质是重写原型对象。为的是提高代码的复用性。JS中的继承主要通过原型去实现继承，由于JS的函数没有像Java函数的函数签名，因此JS并不能实现接口继承，只能通过原型去实现继承。
-开始前我们需要明白原型对象，构造函数，实例三者关系，搞懂了三者关系，下面的继承实现方式就更加易懂 :-)
-
-
-每个构造函数都有一个原型对象。
-每个原型对象都有一个指针（constructor属性）指向构造函数。
-而每个实例内部都有一个指针指向原型对象。
-
-拷贝继承123456789function copyExtend(sourceObj, targetObj) &#123;    for(var ke...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/15</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -899,22 +897,7 @@ IE下，button默认type=”bu...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 10 </div>
+    <div class="total-archive"> Total : 11 </div>
     
     <div class="post-archive">
     
@@ -923,6 +906,11 @@ IE下，button默认type=”bu...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2018/03/22/Promise轻松入门/" >Promise轻松入门</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -992,11 +980,11 @@ IE下，button默认type=”bu...
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
+        <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
+    
         <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
     
         <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
-    
-        <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
