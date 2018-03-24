@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>KurobaneKid&#39;s Lab</title>
+    <title>浏览器http缓存机制 · KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -253,12 +255,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >KurobaneKid&#39;s Lab</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">浏览器http缓存机制</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>KurobaneKid's Lab</a>
 </header>
@@ -272,370 +285,195 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            浏览器http缓存机制
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Web">Web</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/03/24</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/24/浏览器http缓存机制/" >
-                
-                    <span>浏览器http缓存机制</span>
-            </a>
-            <div class="abstract-content">
-                浏览器http缓存机制是Web性能优化中静态资源相关优化的重要一环，是我们前端的重要基础🎯。当浏览器利用http协议向服务器发送资源请求的时候，缓存机制将会起作用，目的是为了提升资源的复用率，降低服务器的鸭梨🍐。
-浏览器缓存机制有两种方式：强制缓存与协商缓存
-强制缓存
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>浏览器http缓存机制是Web性能优化中静态资源相关优化的重要一环，是我们前端的重要基础🎯。当浏览器利用http协议向服务器发送资源请求的时候，缓存机制将会起作用，目的是为了提升资源的复用率，降低服务器的鸭梨🍐。</p>
+<p>浏览器缓存机制有两种方式：<strong>强制缓存</strong>与<strong>协商缓存</strong></p>
+<h2 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h2><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98.png" alt="强制缓存"></p>
+<ol>
+<li>如果缓存命中了，就直接拿来用(状态码:200 from cache)，不找服务器麻烦</li>
+<li>如果缓存没有命中，就进行协商缓存</li>
+</ol>
+<h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98.png" alt="协商缓存"></p>
+<p><strong>对于协商缓存，无论缓存有没有命中都会向服务器发起请求，但不一定会返回资源数据</strong></p>
+<h2 id="浏览器缓存管理"><a href="#浏览器缓存管理" class="headerlink" title="浏览器缓存管理"></a>浏览器缓存管理</h2><ul>
+<li>如果资源存在缓存，浏览器首先进行强制缓存<ul>
+<li>目标缓存未过期，直接从拿来使用</li>
+<li>目标缓存已过期，进行协商缓存<ul>
+<li>服务器告知目标资源<strong>未失效，只是过期了，但是没有被更新</strong>，直接从缓存中获取</li>
+<li>服务器发现目标资源已失效（已被修改），返回新的资源以及缓存规则（http头部放缓存规则，主体部分放的是资源数据）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>敲黑板：资源过期了不等于失效！ 资源过期了不等于失效！ 资源过期了不等于失效！</strong></p>
+<p>理清了浏览器缓存机制的原理，我们可以发现<strong>协商缓存需要搭配强制缓存一起食用🍦，否则就没有意义了</strong></p>
+<h2 id="如何判断缓存是否失效？"><a href="#如何判断缓存是否失效？" class="headerlink" title="如何判断缓存是否失效？"></a>如何判断缓存是否失效？</h2><p>答案：通过设置http消息头的字段，对必要的信息进行对比来判断缓存是否失效</p>
+<h3 id="强制缓存判断原理"><a href="#强制缓存判断原理" class="headerlink" title="强制缓存判断原理"></a>强制缓存判断原理</h3><h4 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/expires.png" alt="强制缓存 | expires"></p>
+<p>请求新的数据时，服务器会在http响应头添加<code>expires</code>值，表示我现在给你的数据如果超过了2018/3/23 11:40:24这么个<strong>时间点</strong>就过期了，数据过期了你（浏览器）就进行协商缓存吧。否则非诚勿扰，去找缓存数据库（http状态码：200 <code>from cache</code>）。</p>
+<p><code>expires</code>是http1.0石器时代的产物，现在的浏览器默认使用http1.1，它发挥的作用已经很小了。</p>
+<p><code>expires</code>存在的问题：</p>
+<ol>
+<li>如果将系统时间设置成超过<code>expires</code>的时间那么浏览器将认为数据已过期</li>
+<li><code>expires</code>值由服务器设定，客户端与服务器之间存在一定时间差，导致这种方法存在误差</li>
+</ol>
+<h4 id="cache-control"><a href="#cache-control" class="headerlink" title="cache-control"></a>cache-control</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/cache-control.png" alt="强制缓存 | cache-control"></p>
+<p><code>cache-control</code>相对<code>expires</code>改进的地方是，由绝对时间变为相对时间。同时如果响应头同时存在这两个字段<code>cache-control</code>的优先级比<code>expires</code><strong>高</strong>，现在给你的数据如果过了10分钟(600s)这么个<strong>时间段</strong>就过期了，数据过期了你（浏览器）就进行协商缓存吧。否则非诚勿扰，去找缓存数据库http状态码：200 <code>from cache</code>）。</p>
+<p>响应头<code>cache-control</code>的可选值</p>
+<ul>
+<li><code>public</code> 谁都可以缓存该数据</li>
+<li><code>private[=&quot;field-name&quot;]</code> 响应报文部分数据(field-name字段数据)仅开放给某些用户缓存</li>
+<li><code>max-age=xxx</code> 通知客户端该数据在xxx秒内仍是新的，无须向服务器发送请求</li>
+<li><code>no-cache</code> 不能直接使用缓存，要向服务器发起请求，验证缓存是否失效</li>
+<li><code>no-store</code> 所有内容都不会被缓存，不会触发强制缓存与协商缓存</li>
+</ul>
+<h3 id="协商缓存判断原理"><a href="#协商缓存判断原理" class="headerlink" title="协商缓存判断原理"></a>协商缓存判断原理</h3><h4 id="last-modified-If-Modified-Since"><a href="#last-modified-If-Modified-Since" class="headerlink" title="last-modified/If-Modified-Since"></a>last-modified/If-Modified-Since</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/last-modified.png" alt="协商缓存 | last-modified"></p>
+<p>第一次请求数据时，服务器会在响应头添加<code>last-modified</code>字段，表示数据最后的修改时间为xxxx。下一次（触发协商缓存）浏览器请求数据会在请求头带上<code>If-Modified-Since</code>字段，表示我缓存的数据上一次修改时间是xxxx。服务器收到请求后将请求头<code>If-Modified-Since</code>字段的值与目标数据最近修改时间进行对比。</p>
+<ul>
+<li>如果<code>If-Modified-Since</code>字段的值小于/等于目标数据最后的修改时间，表示你要的数据没有被修改，你回去找你的缓存数据库要，我懒得给你。（http状态码：304 <code>Not Modified</code>）</li>
+<li>否则，表示你要的数据已经修改过了，我返回新的数据给你（这次http响应同样带有<code>last-modified</code>字段），你还要保存这次新的数据。（http状态码：200 <code>OK</code>）</li>
+</ul>
+<h4 id="etag-If-None-Match"><a href="#etag-If-None-Match" class="headerlink" title="etag/If-None-Match"></a>etag/If-None-Match</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/etag.png" alt="协商缓存 | etag"></p>
+<p><code>etag</code>/<code>If-Node-Match</code>与<code>last-modified</code>/<code>If-Modified-Since</code>一样的道理。第一次请求数据，服务器会在响应头添加<code>etag</code>，下次请求是请求头带上<code>If-None-Match</code>，服务器通过比对就知道目标数据是否已被修改。</p>
+<ul>
+<li>如果两者不相等表明数据已失效(已被修改)，服务器返回新的数据（http状态码：200 <code>OK</code>）。</li>
+<li>否则，数据未被修改，缓存数据仍有效，向缓存数据库获取数据（http状态码：304 <code>Not Modified</code>）。</li>
+</ul>
+<p><code>etag/If-None-Match</code>与<code>last-modified/If-Modified-Since</code>区别：</p>
+<ol>
+<li>etag方法优先级比last-modified方法优先级<strong>高</strong></li>
+<li>etag本身是经过服务器计算得出来的，因此占用一定的服务器资源</li>
+</ol>
+<ul>
+<li>一般情况，<code>etag</code>与<code>last-modified</code>会在响应头同时存在，目的的是避免<code>last-modified</code>的不可靠的情况。</li>
+<li>分布式系统场景：<ul>
+<li>分布式系统中各台机器间的同一资源文件<code>last-modified</code>必须相同，以免负载均衡到不同机器导致比对失败</li>
+<li>对于分布式系统，由于不同机器计算的<code>etag</code>不同，因此一般响应头会设置<strong>不</strong>使用<code>etag</code>字段。</li>
+</ul>
+</li>
+</ul>
+<h2 id="刷新行为对缓存的影响"><a href="#刷新行为对缓存的影响" class="headerlink" title="刷新行为对缓存的影响"></a>刷新行为对缓存的影响</h2><h3 id="输入url-gt-Enter"><a href="#输入url-gt-Enter" class="headerlink" title="输入url =&gt; Enter"></a>输入url =&gt; Enter</h3><p>如果是第一次请求(请求头部不会强制加上<code>Cache-Control</code>请求字段），那就在返回数据同时在http响应头启用<code>cache-contrl</code>/<code>last-modified</code>/<code>etag</code>字段（具体启用哪些字段视实际情况而定，或许添加只一个或许都添加），浏览器接收到数据后会进行缓存</p>
+<p>下一次请求如果缓存有效就直接拿来用（关服务器屁事🙄），否则和服务器协商（又说不关我屁事😂）</p>
+<h3 id="F5"><a href="#F5" class="headerlink" title="F5"></a>F5</h3><blockquote>
+<p>自小屁孩会用电脑开始，就会按F5（桌面/浏览器刷新），这是个小神技😜</p>
+</blockquote>
+<p>按<code>F5</code>会触发协商缓存。你别那么懒😌 ，至少去问问服务器数据有没有过期(请求头部自动加上<code>Cache-Control:max-age=0</code>请求字段)，如果过期了就更新数据咯。没有过期就给你个304(状态码304 <code>Not Modified</code>)，去找缓存拿数据。<strong>（跳过强制缓存，进行协商缓存）</strong></p>
+<h3 id="Ctrl-F5（强制刷新）"><a href="#Ctrl-F5（强制刷新）" class="headerlink" title="Ctrl + F5（强制刷新）"></a>Ctrl + F5（强制刷新）</h3><p>气死我了😡&nbsp;&nbsp;&nbsp;你（浏览器）把（目标地址对应的）全部缓存都扔了，全部资源文件去找服务器重新获取🤪 <strong>（直接从服务器加载，跳过强缓存和协商缓存）</strong></p>
+<h2 id="浏览器的默认行为"><a href="#浏览器的默认行为" class="headerlink" title="浏览器的默认行为"></a>浏览器的默认行为</h2><p>如果http请求的响应头包含<code>expires</code>/<code>cache-control</code>字段，浏览器一定会启用强制缓存。如果响应头没有这两个字段，浏览器也会<strong>出于性能考虑，将CSS/JS/图片等静态资源自动缓存一段时间，这是浏览器的默认行为，不受开发者控制</strong>。</p>
 
-如果缓存命中了，就直接拿来用(状态码:200 from cache)，不找服务器麻烦
-如果缓存没有命中，就进行协商缓存
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/22/Promise轻松入门/" title= Promise轻松入门 >
+                    <div class="prevTitle">Promise轻松入门</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-协商缓存
-对于协商缓存，无论缓存有没有命中都会向服务器发起请求，但不一定会返回资源数据
-浏览器缓存管理
-如果资源存在缓存，浏览器首先进行强制缓存
-目标缓存未过期，直接从拿来使用
-目标缓存已过期，进...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/24</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Web">Web</a>
-    
-</div>
-                
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/22/Promise轻松入门/" >
-                
-                    <span>Promise轻松入门</span>
-            </a>
-            <div class="abstract-content">
-                Promise是ES6引入的一种异步编程解决方案，遵循Promise A+标准，它是一个对象，你可以把它看成是“承诺”或“保证”，因为它真得做到了保证承诺😏。
-异步，可以简单理解为有些操作现在做，有些则留到将来做
-1234567891011function fn(yp)&#123;  setTimeOut(function() &#123;    yp('搞事情'); // 大约1秒后（将来）调用yp()出来搞事情  &#125;, 1000);&#125;fn(function(msg) &#123;  console.log(msg);&#125;);console.log('现在...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/22</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/14/background/" >
-                
-                    <span>详解background属性</span>
-            </a>
-            <div class="abstract-content">
-                本文主要对background的各个“小”属性进行讲解。
-background-color背景颜色默认是transparent（透明）。可以通过十六进制、rgb/rgba、hsl/hsla设置背景颜色
-rgb
-r: red(0-255)
-g: green(0-255)
-b: blue(0-255)
-a: alpha(0-1)透明度，数值越小，透明度越高
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "浏览器http缓存机制", // 可选。默认为 location.href
+        owner: 'kurobanekid',
+        repo: 'blog-comment',
+        oauth: {
+            client_id: '0d35d3bbc9231f294b1f',
+            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
+        },
+    })
+    gitment.render('container')
 
-十六进制实质是将rgb十进制转换为十六进制。e.g rgb(0,255,0) (0=&gt;00,255=&gt;ff,0=&gt;00) ===&gt;&gt; #00ff00 =&gt; #0f0
-hsl
-h: 色相(0-360) ...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/14</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/11/多列布局/" >
-                
-                    <span>多列布局</span>
-            </a>
-            <div class="abstract-content">
-                定宽与自适应
-123456789&lt;div class="parent"&gt;  &lt;div class="left" style="width: 200px; background: #41b883;"&gt;    &lt;p&gt;left&lt;/p&gt;  &lt;/div&gt;  &lt;div class="right" style="background: #ccc;"&gt;    &lt;p&gt;right&lt;/p&gt;    &lt;p&gt;right&lt;/p&gt;  &lt;/div&gt;&lt;/div&gt;
-float+mar...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/11</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/10/居中布局/" >
-                
-                    <span>居中布局</span>
-            </a>
-            <div class="abstract-content">
-                水平居中123&lt;div class="parent" style="width: 500px; background: #ccc;"&gt;  &lt;div class="child" style="width: 100px; height: 100px; background: #41b883;"&gt;&lt;/div&gt;&lt;/div&gt;
-text-align+inline-block
-优点：兼容性好
-缺点：子元素会继承父元素text-align值，子元素需要重新设置该值
+</script>
 
-123456.parent &#123;  text-align: center;&#12...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/10</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/10/position/" >
-                
-                    <span>position（定位）</span>
-            </a>
-            <div class="abstract-content">
-                postion属性值
-static(默认)
-inherit
-relative
-absolute
-fixed
+    <!--PC版-->
 
-static不指定position，默认为static，忽略top、 bottom、left、right或z-index声明
-inherit从父元素继承position值  
-接下来主要介绍后三个属性
-123456&lt;div class="container"&gt;  &lt;p&gt;第一段&lt;/p&gt;  &lt;p&gt;第二段&lt;/p&gt;  &lt;p&gt;第三段&lt;/p&gt;  &lt;p&gt;第四段&lt;/p&gt;&lt;/div&g...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/10</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/10/button与input-type-button区别/" >
-                
-                    <span>button与input type=&#34;button&#34;区别</span>
-            </a>
-            <div class="abstract-content">
-                button控件是按钮，可以看做是一个容器，提供了展现表现力更好内容（文本或图像等多媒体内容）的可能，就如div那样可以“存放” &lt; img &gt; &lt; p &gt; &lt; h1 &gt; 等等的元素。而&lt; input type=”button” /&gt;也是按钮，功能上与button没有区别，表现力相对来说没那么强。如果需要表现图像，可以将input type设置为image，但是点击它时（被包含在表单中），它会提交当前表单，而input type=”button”，被点击后并不会提交表单，默认不做任何事情。
-注意事项
-IE下，button默认type=”bu...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/10</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "HTML">HTML</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/09/DFS-BFS/" >
-                
-                    <span>深度优先遍历与广度优先遍历</span>
-            </a>
-            <div class="abstract-content">
-                深度优先遍历先介绍深度优先遍历。深度优先遍历从一路径的起始点开始追溯，直到遍历该路径的最后一个节点，然后回溯，继续追溯下一路径，依次类推，直到遍历完成。如上图所示。深度优先遍历实现相对简单，通过递归即可完成。不断递归，直到本路径最后一个节点，然后回溯，继续递归。
-广度优先遍历广度优先遍历，则优先遍历同一层次最邻近的节点，然后再往下遍历上一层首个节点的下层节点。如上图所示。由于往下遍历时，关系到上一层节点，因此通过队列实现。主要步骤如下：
-
-将根节点添加到队列中
-从队列中取出(shift)第一个节点遍历
-如果节点含有下一层节点，则添加到队列中（所有下层节点）
+    <!--PC版-->
 
 
-重复步骤2直到队列为空
-
-...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/09</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "算法">算法</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/08/height-100不起作用/" >
-                
-                    <span>height:100%不起作用?</span>
-            </a>
-            <div class="abstract-content">
-                二话不说先上代码
-123456789&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;  &lt;title&gt;KurobaneKid's Lab&lt;/title&gt;&lt;/head&gt;&lt;body&gt;    &lt;p style="height: 100%"&gt;Just for a test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-大家第一感觉p元素的高度是不是将会是屏幕的高度（填充整个屏幕）呢？毫无疑问，答案是否定的。直觉上认为p元素的高度100%就是填充整个屏幕，说明什么呢？我们...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/08</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/06/Linux-Package-Install/" >
-                
-                    <span>Linux软件包管理</span>
-            </a>
-            <div class="abstract-content">
-                Linux软件包安装方式：1. 源码包安装下载源码包后，通过本地编译后进行安装
-优点
-开源。能够阅读软件包(Package)的源代码进行学习
-自由度高。通过修改软件源码进行自定义安装
-稳定性高。因为软件是通过本机编译安装。比同样软件用rpm包安装后提升大约5%，也更加稳定
-
-缺点
-安装比较大的软件时，步骤较为繁琐，有可能出错
-安装时间较长（因为需要进行编译）
-编译可能报错，对入门者并不友好
-
-2. 二进制安装（rpm包/系统默认安装）软件厂商将源码包编译成二进制文件，用户直接安装就可以
-优点
-安装时间较快
-通过简单命令能够对软件进行升级、删除、修改
-
-缺点
-自由度比源码包安装方式弱一些。...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/06</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">NEXT &#62;</a>
-    </nav>
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -708,6 +546,24 @@ IE下，button默认type=”bu...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#强制缓存"><span class="toc-number">1.</span> <span class="toc-text">强制缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协商缓存"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器缓存管理"><span class="toc-number">3.</span> <span class="toc-text">浏览器缓存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断缓存是否失效？"><span class="toc-number">4.</span> <span class="toc-text">如何判断缓存是否失效？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#强制缓存判断原理"><span class="toc-number">4.1.</span> <span class="toc-text">强制缓存判断原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#expires"><span class="toc-number">4.1.1.</span> <span class="toc-text">expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cache-control"><span class="toc-number">4.1.2.</span> <span class="toc-text">cache-control</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协商缓存判断原理"><span class="toc-number">4.2.</span> <span class="toc-text">协商缓存判断原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#last-modified-If-Modified-Since"><span class="toc-number">4.2.1.</span> <span class="toc-text">last-modified/If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#etag-If-None-Match"><span class="toc-number">4.2.2.</span> <span class="toc-text">etag/If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#刷新行为对缓存的影响"><span class="toc-number">5.</span> <span class="toc-text">刷新行为对缓存的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入url-gt-Enter"><span class="toc-number">5.1.</span> <span class="toc-text">输入url => Enter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F5"><span class="toc-number">5.2.</span> <span class="toc-text">F5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ctrl-F5（强制刷新）"><span class="toc-number">5.3.</span> <span class="toc-text">Ctrl + F5（强制刷新）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的默认行为"><span class="toc-number">6.</span> <span class="toc-text">浏览器的默认行为</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -988,6 +844,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

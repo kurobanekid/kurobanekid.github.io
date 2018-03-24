@@ -301,6 +301,44 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/24/浏览器http缓存机制/" >
+                
+                    <span>浏览器http缓存机制</span>
+            </a>
+            <div class="abstract-content">
+                浏览器http缓存机制是Web性能优化中静态资源相关优化的重要一环，是我们前端的重要基础🎯。当浏览器利用http协议向服务器发送资源请求的时候，缓存机制将会起作用，目的是为了提升资源的复用率，降低服务器的鸭梨🍐。
+浏览器缓存机制有两种方式：强制缓存与协商缓存
+强制缓存
+
+如果缓存命中了，就直接拿来用(状态码:200 from cache)，不找服务器麻烦
+如果缓存没有命中，就进行协商缓存
+
+协商缓存
+对于协商缓存，无论缓存有没有命中都会向服务器发起请求，但不一定会返回资源数据
+浏览器缓存管理
+如果资源存在缓存，浏览器首先进行强制缓存
+目标缓存未过期，直接从拿来使用
+目标缓存已过期，进...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/24</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Web">Web</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/03/22/Promise轻松入门/" >
                 
                     <span>Promise轻松入门</span>
@@ -592,35 +630,11 @@ IE下，button默认type=”bu...
             </div>
         </article>
     
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/06/几个简单排序算法/" >
-                
-                    <span>几个简单排序算法</span>
-            </a>
-            <div class="abstract-content">
-                在编程入门时应该知道排序和查找是程序猿的基本素质要求。那么现在介绍几个简单的排序算法。冒泡排序、选择排序、插入排序。这三种排序的名字表明了它们的思维方式，也反映了这些排序算法很逼真的模拟了人类现实生活中对数据排序的方法。排序一般是通过嵌套for循环完成，外循环完成遍历数组的每一项的任务，而内循环则是进行数据值的比较。
-冒泡排序(BubbleSort)冒泡排序里数据值就像气泡那样从底部往水面顶部移动（数据值大的往上[往右]移动）。冒泡排序是最容易实现的排序算法，也是最慢的一种排序。
-12345678910function bubbleSort()&#123;  let tailIndex ...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/06</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "算法">算法</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/archives/2018/03/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/03/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -814,7 +828,18 @@ IE下，button默认type=”bu...
     
     
     
-    <div class="total-archive"> Total : 11 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 12 </div>
     
     <div class="post-archive">
     
@@ -823,6 +848,11 @@ IE下，button默认type=”bu...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2018/03/24/浏览器http缓存机制/" >浏览器http缓存机制</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -902,6 +932,8 @@ IE下，button默认type=”bu...
         <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
     
         <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
