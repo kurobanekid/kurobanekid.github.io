@@ -355,8 +355,8 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <p>浏览器http缓存机制是Web性能优化中静态资源相关优化的重要一环，是我们前端的重要基础🎯。当浏览器利用http协议向服务器发送资源请求的时候，缓存机制将会起作用，目的是为了提升资源的复用率，降低服务器的鸭梨🍐。</p>
-<p>浏览器缓存机制有两种方式：<strong>强制缓存</strong>与<strong>协商缓存</strong></p>
-<h2 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h2><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98.png" alt="强制缓存"></p>
+<p>浏览器缓存机制有两种方式：<strong>强缓存</strong>与<strong>协商缓存</strong></p>
+<h2 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h2><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/%E5%BC%BA%E7%BC%93%E5%AD%98.png" alt="强缓存"></p>
 <ol>
 <li>如果缓存命中了，就直接拿来用(状态码:200 from cache)，不找服务器麻烦</li>
 <li>如果缓存没有命中，就进行协商缓存</li>
@@ -364,7 +364,7 @@ height:50vh;
 <h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98.png" alt="协商缓存"></p>
 <p><strong>对于协商缓存，无论缓存有没有命中都会向服务器发起请求，但不一定会返回资源数据</strong></p>
 <h2 id="浏览器缓存管理"><a href="#浏览器缓存管理" class="headerlink" title="浏览器缓存管理"></a>浏览器缓存管理</h2><ul>
-<li>如果资源存在缓存，浏览器首先进行强制缓存<ul>
+<li>如果资源存在缓存，浏览器首先进行强缓存<ul>
 <li>目标缓存未过期，直接从拿来使用</li>
 <li>目标缓存已过期，进行协商缓存<ul>
 <li>服务器告知目标资源<strong>未失效，只是过期了，但是没有被更新</strong>，直接从缓存中获取</li>
@@ -373,11 +373,12 @@ height:50vh;
 </li>
 </ul>
 </li>
+<li>如果资源不存在缓存，浏览器直接向服务器发起资源请求(不进行强缓存与协商缓存)</li>
 </ul>
 <p><strong>敲黑板：资源过期了不等于失效！ 资源过期了不等于失效！ 资源过期了不等于失效！</strong></p>
-<p>理清了浏览器缓存机制的原理，我们可以发现<strong>协商缓存需要搭配强制缓存一起食用🍦，否则就没有意义了</strong></p>
+<p>理清了浏览器缓存机制的原理，我们可以发现<strong>协商缓存需要搭配强缓存一起食用🍦，否则就没有意义了</strong></p>
 <h2 id="如何判断缓存是否失效？"><a href="#如何判断缓存是否失效？" class="headerlink" title="如何判断缓存是否失效？"></a>如何判断缓存是否失效？</h2><p>答案：通过设置http消息头的字段，对必要的信息进行对比来判断缓存是否失效</p>
-<h3 id="强制缓存判断原理"><a href="#强制缓存判断原理" class="headerlink" title="强制缓存判断原理"></a>强制缓存判断原理</h3><h4 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/expires.png" alt="强制缓存 | expires"></p>
+<h3 id="强缓存判断原理"><a href="#强缓存判断原理" class="headerlink" title="强缓存判断原理"></a>强缓存判断原理</h3><h4 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/expires.png" alt="强缓存 | expires"></p>
 <p>请求新的数据时，服务器会在http响应头添加<code>expires</code>值，表示我现在给你的数据如果超过了2018/3/23 11:40:24这么个<strong>时间点</strong>就过期了，数据过期了你（浏览器）就进行协商缓存吧。否则非诚勿扰，去找缓存数据库（http状态码：200 <code>from cache</code>）。</p>
 <p><code>expires</code>是http1.0石器时代的产物，现在的浏览器默认使用http1.1，它发挥的作用已经很小了。</p>
 <p><code>expires</code>存在的问题：</p>
@@ -385,7 +386,7 @@ height:50vh;
 <li>如果将系统时间设置成超过<code>expires</code>的时间那么浏览器将认为数据已过期</li>
 <li><code>expires</code>值由服务器设定，客户端与服务器之间存在一定时间差，导致这种方法存在误差</li>
 </ol>
-<h4 id="cache-control"><a href="#cache-control" class="headerlink" title="cache-control"></a>cache-control</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/cache-control.png" alt="强制缓存 | cache-control"></p>
+<h4 id="cache-control"><a href="#cache-control" class="headerlink" title="cache-control"></a>cache-control</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/cache-control.png" alt="强缓存 | cache-control"></p>
 <p><code>cache-control</code>相对<code>expires</code>改进的地方是，由绝对时间变为相对时间。同时如果响应头同时存在这两个字段<code>cache-control</code>的优先级比<code>expires</code><strong>高</strong>，现在给你的数据如果过了10分钟(600s)这么个<strong>时间段</strong>就过期了，数据过期了你（浏览器）就进行协商缓存吧。否则非诚勿扰，去找缓存数据库http状态码：200 <code>from cache</code>）。</p>
 <p>响应头<code>cache-control</code>的可选值</p>
 <ul>
@@ -393,7 +394,7 @@ height:50vh;
 <li><code>private[=&quot;field-name&quot;]</code> 响应报文部分数据(field-name字段数据)仅开放给某些用户缓存</li>
 <li><code>max-age=xxx</code> 通知客户端该数据在xxx秒内仍是新的，无须向服务器发送请求</li>
 <li><code>no-cache</code> 不能直接使用缓存，要向服务器发起请求，验证缓存是否失效</li>
-<li><code>no-store</code> 所有内容都不会被缓存，不会触发强制缓存与协商缓存</li>
+<li><code>no-store</code> 所有内容都不会被缓存，不会触发强缓存与协商缓存</li>
 </ul>
 <h3 id="协商缓存判断原理"><a href="#协商缓存判断原理" class="headerlink" title="协商缓存判断原理"></a>协商缓存判断原理</h3><h4 id="last-modified-If-Modified-Since"><a href="#last-modified-If-Modified-Since" class="headerlink" title="last-modified/If-Modified-Since"></a>last-modified/If-Modified-Since</h4><p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E6%B5%8F%E8%A7%88%E5%99%A8http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/last-modified.png" alt="协商缓存 | last-modified"></p>
 <p>第一次请求数据时，服务器会在响应头添加<code>last-modified</code>字段，表示数据最后的修改时间为xxxx。下一次（触发协商缓存）浏览器请求数据会在请求头带上<code>If-Modified-Since</code>字段，表示我缓存的数据上一次修改时间是xxxx。服务器收到请求后将请求头<code>If-Modified-Since</code>字段的值与目标数据最近修改时间进行对比。</p>
@@ -425,9 +426,9 @@ height:50vh;
 <h3 id="F5"><a href="#F5" class="headerlink" title="F5"></a>F5</h3><blockquote>
 <p>自小屁孩会用电脑开始，就会按F5（桌面/浏览器刷新），这是个小神技😜</p>
 </blockquote>
-<p>按<code>F5</code>会触发协商缓存。你别那么懒😌 ，至少去问问服务器数据有没有过期(请求头部自动加上<code>Cache-Control:max-age=0</code>请求字段)，如果过期了就更新数据咯。没有过期就给你个304(状态码304 <code>Not Modified</code>)，去找缓存拿数据。<strong>（跳过强制缓存，进行协商缓存）</strong></p>
+<p>按<code>F5</code>会触发协商缓存。你别那么懒😌 ，至少去问问服务器数据有没有过期(请求头部自动加上<code>Cache-Control:max-age=0</code>请求字段)，如果过期了就更新数据咯。没有过期就给你个304(状态码304 <code>Not Modified</code>)，去找缓存拿数据。<strong>（跳过强缓存，进行协商缓存）</strong></p>
 <h3 id="Ctrl-F5（强制刷新）"><a href="#Ctrl-F5（强制刷新）" class="headerlink" title="Ctrl + F5（强制刷新）"></a>Ctrl + F5（强制刷新）</h3><p>气死我了😡&nbsp;&nbsp;&nbsp;你（浏览器）把（目标地址对应的）全部缓存都扔了，全部资源文件去找服务器重新获取🤪 <strong>（直接从服务器加载，跳过强缓存和协商缓存）</strong></p>
-<h2 id="浏览器的默认行为"><a href="#浏览器的默认行为" class="headerlink" title="浏览器的默认行为"></a>浏览器的默认行为</h2><p>如果http请求的响应头包含<code>expires</code>/<code>cache-control</code>字段，浏览器一定会启用强制缓存。如果响应头没有这两个字段，浏览器也会<strong>出于性能考虑，将CSS/JS/图片等静态资源自动缓存一段时间，这是浏览器的默认行为，不受开发者控制</strong>。</p>
+<h2 id="浏览器的默认行为"><a href="#浏览器的默认行为" class="headerlink" title="浏览器的默认行为"></a>浏览器的默认行为</h2><p>如果http请求的响应头包含<code>expires</code>/<code>cache-control</code>字段，浏览器一定会启用强缓存。如果响应头没有这两个字段，浏览器也会<strong>出于性能考虑，将CSS/JS/图片等静态资源自动缓存一段时间，这是浏览器的默认行为，不受开发者控制</strong>。</p>
 
     </article>
     <!-- 前后页  -->
@@ -562,7 +563,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#强制缓存"><span class="toc-number">1.</span> <span class="toc-text">强制缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协商缓存"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器缓存管理"><span class="toc-number">3.</span> <span class="toc-text">浏览器缓存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断缓存是否失效？"><span class="toc-number">4.</span> <span class="toc-text">如何判断缓存是否失效？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#强制缓存判断原理"><span class="toc-number">4.1.</span> <span class="toc-text">强制缓存判断原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#expires"><span class="toc-number">4.1.1.</span> <span class="toc-text">expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cache-control"><span class="toc-number">4.1.2.</span> <span class="toc-text">cache-control</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协商缓存判断原理"><span class="toc-number">4.2.</span> <span class="toc-text">协商缓存判断原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#last-modified-If-Modified-Since"><span class="toc-number">4.2.1.</span> <span class="toc-text">last-modified/If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#etag-If-None-Match"><span class="toc-number">4.2.2.</span> <span class="toc-text">etag/If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#刷新行为对缓存的影响"><span class="toc-number">5.</span> <span class="toc-text">刷新行为对缓存的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入url-gt-Enter"><span class="toc-number">5.1.</span> <span class="toc-text">输入url => Enter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F5"><span class="toc-number">5.2.</span> <span class="toc-text">F5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ctrl-F5（强制刷新）"><span class="toc-number">5.3.</span> <span class="toc-text">Ctrl + F5（强制刷新）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的默认行为"><span class="toc-number">6.</span> <span class="toc-text">浏览器的默认行为</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#强缓存"><span class="toc-number">1.</span> <span class="toc-text">强缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协商缓存"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器缓存管理"><span class="toc-number">3.</span> <span class="toc-text">浏览器缓存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断缓存是否失效？"><span class="toc-number">4.</span> <span class="toc-text">如何判断缓存是否失效？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#强缓存判断原理"><span class="toc-number">4.1.</span> <span class="toc-text">强缓存判断原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#expires"><span class="toc-number">4.1.1.</span> <span class="toc-text">expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cache-control"><span class="toc-number">4.1.2.</span> <span class="toc-text">cache-control</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协商缓存判断原理"><span class="toc-number">4.2.</span> <span class="toc-text">协商缓存判断原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#last-modified-If-Modified-Since"><span class="toc-number">4.2.1.</span> <span class="toc-text">last-modified/If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#etag-If-None-Match"><span class="toc-number">4.2.2.</span> <span class="toc-text">etag/If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#刷新行为对缓存的影响"><span class="toc-number">5.</span> <span class="toc-text">刷新行为对缓存的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入url-gt-Enter"><span class="toc-number">5.1.</span> <span class="toc-text">输入url => Enter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F5"><span class="toc-number">5.2.</span> <span class="toc-text">F5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ctrl-F5（强制刷新）"><span class="toc-number">5.3.</span> <span class="toc-text">Ctrl + F5（强制刷新）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的默认行为"><span class="toc-number">6.</span> <span class="toc-text">浏览器的默认行为</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
