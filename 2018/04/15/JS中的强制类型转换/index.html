@@ -596,7 +596,7 @@ height:50vh;
 </blockquote>
 </li>
 <li><code>leftval&lt;=rightval</code>将会处理为<code>rightval&lt;leftval</code>，如果<code>rightval&lt;leftval</code>结果为<code>true</code>或者<code>undefined</code>就返回<code>false</code>，即如果为<code>false</code>就返回<code>true</code>（即将结果取反）</li>
-<li>因此根据规范，<code>a&lt;=b</code>将会处理为<code>b&lt;a</code>，而<code>b&lt;a</code>为<code>false</code>，所以取反后得到结果为true，即<code>a&lt;=b</code>为<code>true</code>。</li>
+<li>因此根据规范，<code>a&lt;=b</code>将会处理为<code>!(b&lt;a)</code>，其中<code>b&lt;a</code>为<code>false</code>，取反后得到结果为true，所以<code>a&lt;=b</code>为<code>true</code>。</li>
 <li>我们对<code>a&lt;=b</code>的认识应该从“小于等于”的转变为“不大于”，即从<code>!(a&gt;b)</code>转变为<code>!(b&lt;a)</code>。对待<code>a&gt;=b</code>同理。</li>
 </ul>
 </li>
