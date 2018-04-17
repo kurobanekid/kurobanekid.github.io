@@ -301,6 +301,36 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/04/17/值和引用/" >
+                
+                    <span>值和引用</span>
+            </a>
+            <div class="abstract-content">
+                JavaScript是没有指针的，JS的变量是不可能成为指向另一个变量的引用的。JS对值和引用的赋值/传递在语法上没有区别，完全根据值的类型来决定。我们是无法自主决定使用值复制还是引用复制，一切根据值的类型决定。
+简单值(scalar primitive): null,undefined,string,number,boolean,symbol
+简单值是通过 值复制(value-cppy) 的方式赋值/传递
+123456var a = 1;b = a;b; // 1b = 2;a; // 1b; // 2
+由于a是简单值，所以b=a是将a的值复制一份，赋值给b（值复制）。变量a持有该值的...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/17</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/04/15/JS中的强制类型转换/" >
                 
                     <span>JS中的强制类型转换</span>
@@ -587,34 +617,6 @@ IE下，button默认type=”bu...
             </div>
         </article>
     
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/08/height-100不起作用/" >
-                
-                    <span>height:100%不起作用?</span>
-            </a>
-            <div class="abstract-content">
-                二话不说先上代码
-123456789&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;  &lt;title&gt;KurobaneKid's Lab&lt;/title&gt;&lt;/head&gt;&lt;body&gt;    &lt;p style="height: 100%"&gt;Just for a test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-大家第一感觉p元素的高度是不是将会是屏幕的高度（填充整个屏幕）呢？毫无疑问，答案是否定的。直觉上认为p元素的高度100%就是填充整个屏幕，说明什么呢？我们...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/08</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -841,7 +843,36 @@ IE下，button默认type=”bu...
     
     
     
-    <div class="total-archive"> Total : 13 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
     
     <div class="post-archive">
     
@@ -850,6 +881,11 @@ IE下，button默认type=”bu...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2018/04/17/值和引用/" >值和引用</a>
+        </li>
     
     
         <li class="archive-post-item">

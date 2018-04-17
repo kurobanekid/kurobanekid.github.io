@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>KurobaneKid&#39;s Lab</title>
+    <title>值和引用 · KurobaneKid&#39;s Lab</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -253,12 +255,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >KurobaneKid&#39;s Lab</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">值和引用</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>KurobaneKid's Lab</a>
 </header>
@@ -272,68 +285,165 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            值和引用
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/17</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>JavaScript是没有指针的，JS的变量是不可能成为指向另一个变量的引用的。JS对值和引用的赋值/传递在语法上没有区别，完全根据值的类型来决定。我们是无法自主决定使用值复制还是引用复制，一切根据值的类型决定。</p>
+<p>简单值(scalar primitive): null,undefined,string,number,boolean,symbol</p>
+<p>简单值是通过 <strong>值复制(value-cppy)</strong> 的方式赋值/传递</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">b = a;</div><div class="line">b; <span class="comment">// 1</span></div><div class="line">b = <span class="number">2</span>;</div><div class="line">a; <span class="comment">// 1</span></div><div class="line">b; <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>由于a是简单值，所以<code>b=a</code>是将a的值复制一份，赋值给b（值复制）。变量a持有该值的复本，变量b持有它的另一个复本。因此，b的改变并不影响a;</p>
+<p>复合值(compound value): 对象（包括数组和对象）和函数</p>
+<p>复合值是通过 <strong>引用复制(reference-copy)</strong> 的方式赋值/传递</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">b = a;</div><div class="line">b; <span class="comment">// [1, 2, 3]</span></div><div class="line">b.push(<span class="number">4</span>);</div><div class="line">a; <span class="comment">// [1, 2, 3, 4]</span></div><div class="line">b; <span class="comment">// [1, 2, 3, 4]</span></div><div class="line"><span class="comment">// --------------</span></div><div class="line">b = [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>];</div><div class="line">b; <span class="comment">// [6, 7, 8]</span></div><div class="line">a; <span class="comment">// [1, 2, 3, 4]</span></div></pre></td></tr></table></figure>
+<p>由于a是复合值，所以采用<strong>引用赋值</strong>方式赋值，<code>b=a</code>是将a指向该值的<strong>引用</strong>复制一份，赋值给b。此时变量a和变量b指向同一个复合值[1,2,3]，但是它们是两个不同的引用（既然是引用就表明变量a、b是<strong>指向某个值并非持有某个值</strong>）</p>
+<p>下面是一道面试题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// a</span></div><div class="line">  x.n = <span class="number">3</span>;</div><div class="line">  x = &#123; <span class="attr">n</span>:<span class="number">2</span> &#125;;</div><div class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// b</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = &#123; <span class="attr">n</span>:<span class="number">1</span> &#125;;</div><div class="line">foo(x);</div><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// c</span></div></pre></td></tr></table></figure>
+<p>你认为答案是什么呢？</p>
+<p>前面我们讲到的都是值的赋值，现在就到值的传递了。由于全局变量x是复合值，所以函数传递x实际是将x的引用复制一份传给参数x[foo(x)]，而全局变量x仍然指向{n:1}。毫无疑问，a会打印<code>1</code>。</p>
+<p>由于函数传递{n:1}引用给函数内的x变量（局部变量），所以<code>x.n=3</code>将会修改引用的值由{n:1}变为{n:3}，因为全局变量x与局部变量x指向同一个值，所以这时候全局变量x就会被影响，变为{n:3}。</p>
+<p><code>x={ n:2 };</code>将局部变量x指向新的内存空间，全局变量x不受影响，所以b打印的是<code>2</code>，c是要打印全局变量x，由于<code>x.n=3</code>已将全局变量指向的值修改为3，所以c打印的是<code>3</code>。所以答案是: 1-&gt;2-&gt;3</p>
+<h2 id="简单类型与复合类型的存储方式，"><a href="#简单类型与复合类型的存储方式，" class="headerlink" title="简单类型与复合类型的存储方式，"></a>简单类型与复合类型的存储方式，</h2><p>基本数据类型是通过栈存储，复杂数据类型(数组、对象等)是通过堆存储</p>
+<p>栈和堆得区别是什么</p>
+<p>栈(Stack)会（系统）自动分配内存空间，会自动释放（自动申请，自动释放/临时/局部）</p>
+<p>堆(Heap)动态分配的内存，大小不定也不会自动释放(手动申请，手动释放/持久化/全局)</p>
+<p>基本类型数据直接存储在栈中的简单数据段，占用空间小，大小固定，属于被频繁访问的数据。</p>
+<p>引用类型数据存储在堆中的对象，占用空间大，大小不固定，如果存放在栈中会影响程序性能。引用类型在栈的存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用类型时，首先检索它在栈中的指针，读取该指针，指针内容就是它在堆中的地址，然后通过堆中的地址取得实体。</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/stack_heap.jpg" alt="栈和堆"></p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>简单类型：</p>
+<ul>
+<li>null</li>
+<li>undefined</li>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>symbol</li>
+</ul>
+<p>复杂类型： object [built-in function / native function]</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Array</li>
+<li>Object</li>
+<li>Function</li>
+<li>RegExp</li>
+<li>Date</li>
+<li>Error</li>
+<li>Symbol</li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/04/15/JS中的强制类型转换/" title= JS中的强制类型转换 >
+                    <div class="prevTitle">JS中的强制类型转换</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/10/15/extends/" >
-                
-                    <span>JS继承</span>
-            </a>
-            <div class="abstract-content">
-                继承实现的实质是重写原型对象。为的是提高代码的复用性。JS中的继承主要通过原型去实现继承，由于JS的函数没有像Java函数的函数签名，因此JS并不能实现接口继承，只能通过原型去实现继承。
-开始前我们需要明白原型对象，构造函数，实例三者关系，搞懂了三者关系，下面的继承实现方式就更加易懂 :-)
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "值和引用", // 可选。默认为 location.href
+        owner: 'kurobanekid',
+        repo: 'blog-comment',
+        oauth: {
+            client_id: '0d35d3bbc9231f294b1f',
+            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
 
 
-每个构造函数都有一个原型对象。
-每个原型对象都有一个指针（constructor属性）指向构造函数。
-而每个实例内部都有一个指针指向原型对象。
-
-拷贝继承123456789function copyExtend(sourceObj, targetObj) &#123;    for(var ke...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/15</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -406,6 +516,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单类型与复合类型的存储方式，"><span class="toc-number">1.</span> <span class="toc-text">简单类型与复合类型的存储方式，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型"><span class="toc-number">2.</span> <span class="toc-text">类型</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -742,6 +870,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
