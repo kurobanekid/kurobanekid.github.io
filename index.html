@@ -321,11 +321,18 @@ height:50vh;
                     <span>值和引用</span>
             </a>
             <div class="abstract-content">
-                JavaScript是没有指针的，JS的变量是不可能成为指向另一个变量的引用的。JS对值和引用的赋值/传递在语法上没有区别，完全根据值的类型来决定。我们是无法自主决定使用值复制还是引用复制，一切根据值的类型决定。
-简单值(scalar primitive): null,undefined,string,number,boolean,symbol
+                JavaScript是没有指针的，JavaScript的变量是不可能成为指向另一个变量的引用的。JavaScript对 “值与引用” 的赋值/传递在语法上没有区别，完全根据值的类型来决定。我们是无法自主决定使用值复制还是引用复制，一切根据值的类型决定。
+简单值与复合值简单值(即标量基本类型值，scalar primitive values):
+
+null
+undefined
+string
+number
+boolean
+symbol
+
 简单值是通过 值复制(value-cppy) 的方式赋值/传递
-123456var a = 1;b = a;b; // 1b = 2;a; // 1b; // 2
-由于a是简单值，所以b=a是将a的值复制一份，赋值给b（值复制）。变量a持有该值的...
+123456var a = 1;b = a;b; // 1b = 2;a; // 1b; /...
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->

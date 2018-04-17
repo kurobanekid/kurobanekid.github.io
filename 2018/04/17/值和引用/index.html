@@ -354,50 +354,40 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>JavaScript是没有指针的，JS的变量是不可能成为指向另一个变量的引用的。JS对值和引用的赋值/传递在语法上没有区别，完全根据值的类型来决定。我们是无法自主决定使用值复制还是引用复制，一切根据值的类型决定。</p>
-<p>简单值(scalar primitive): null,undefined,string,number,boolean,symbol</p>
-<p>简单值是通过 <strong>值复制(value-cppy)</strong> 的方式赋值/传递</p>
+        <p><code>JavaScript</code>是没有指针的，<code>JavaScript</code>的变量是不可能成为指向另一个变量的引用的。<code>JavaScript</code>对 “值与引用” 的赋值/传递在语法上没有区别，完全根据<strong>值的类型</strong>来决定。我们是无法自主决定使用值复制还是引用复制，一切根据值的类型决定。</p>
+<h2 id="简单值与复合值"><a href="#简单值与复合值" class="headerlink" title="简单值与复合值"></a>简单值与复合值</h2><p><strong>简单值</strong>(即标量基本类型值，<strong><code>scalar primitive values</code></strong>):</p>
+<ul>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>string</code></li>
+<li><code>number</code></li>
+<li><code>boolean</code></li>
+<li><code>symbol</code></li>
+</ul>
+<p>简单值是通过 <strong>值复制(<code>value-cppy</code>)</strong> 的方式赋值/传递</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">b = a;</div><div class="line">b; <span class="comment">// 1</span></div><div class="line">b = <span class="number">2</span>;</div><div class="line">a; <span class="comment">// 1</span></div><div class="line">b; <span class="comment">// 2</span></div></pre></td></tr></table></figure>
-<p>由于a是简单值，所以<code>b=a</code>是将a的值复制一份，赋值给b（值复制）。变量a持有该值的复本，变量b持有它的另一个复本。因此，b的改变并不影响a;</p>
-<p>复合值(compound value): 对象（包括数组和对象）和函数</p>
-<p>复合值是通过 <strong>引用复制(reference-copy)</strong> 的方式赋值/传递</p>
+<p>由于<code>a</code>是简单值，所以<code>b=a</code>是将a的值复制一份，赋值给<code>b</code>（值复制）。变量<code>a</code>持有该值的复本，变量<code>b</code>持有它的另一个复本。因此，<code>b</code>的改变并不影响<code>a</code>;</p>
+<p><strong>复合值(<code>compound value</code>)</strong>: 对象（包括数组、封装对象）和函数</p>
+<ul>
+<li><code>object</code></li>
+<li><code>function</code></li>
+</ul>
+<p>复合值是通过 <strong>引用复制(<code>reference-copy</code>)</strong> 的方式赋值/传递</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">b = a;</div><div class="line">b; <span class="comment">// [1, 2, 3]</span></div><div class="line">b.push(<span class="number">4</span>);</div><div class="line">a; <span class="comment">// [1, 2, 3, 4]</span></div><div class="line">b; <span class="comment">// [1, 2, 3, 4]</span></div><div class="line"><span class="comment">// --------------</span></div><div class="line">b = [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>];</div><div class="line">b; <span class="comment">// [6, 7, 8]</span></div><div class="line">a; <span class="comment">// [1, 2, 3, 4]</span></div></pre></td></tr></table></figure>
-<p>由于a是复合值，所以采用<strong>引用赋值</strong>方式赋值，<code>b=a</code>是将a指向该值的<strong>引用</strong>复制一份，赋值给b。此时变量a和变量b指向同一个复合值[1,2,3]，但是它们是两个不同的引用（既然是引用就表明变量a、b是<strong>指向某个值并非持有某个值</strong>）</p>
-<p>下面是一道面试题</p>
+<p>由于<code>a</code>是复合值，所以采用<strong>引用赋值</strong>方式赋值，<code>b=a</code>是将<code>a</code>指向该值的<strong>引用</strong>复制一份，赋值给<code>b</code>。此时变量<code>a</code>和变量<code>b</code>指向同一个复合值<code>[1,2,3]</code>，但是它们是两个不同的引用（既然是引用就表明变量<code>a</code>与<code>b</code>是<strong>指向某个值并非持有某个值</strong>）</p>
+<p>小二，来道题目😁</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// a</span></div><div class="line">  x.n = <span class="number">3</span>;</div><div class="line">  x = &#123; <span class="attr">n</span>:<span class="number">2</span> &#125;;</div><div class="line">  <span class="built_in">console</span>.log(x); <span class="comment">// b</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = &#123; <span class="attr">n</span>:<span class="number">1</span> &#125;;</div><div class="line">foo(x);</div><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// c</span></div></pre></td></tr></table></figure>
 <p>你认为答案是什么呢？</p>
-<p>前面我们讲到的都是值的赋值，现在就到值的传递了。由于全局变量x是复合值，所以函数传递x实际是将x的引用复制一份传给参数x[foo(x)]，而全局变量x仍然指向{n:1}。毫无疑问，a会打印<code>1</code>。</p>
-<p>由于函数传递{n:1}引用给函数内的x变量（局部变量），所以<code>x.n=3</code>将会修改引用的值由{n:1}变为{n:3}，因为全局变量x与局部变量x指向同一个值，所以这时候全局变量x就会被影响，变为{n:3}。</p>
-<p><code>x={ n:2 };</code>将局部变量x指向新的内存空间，全局变量x不受影响，所以b打印的是<code>2</code>，c是要打印全局变量x，由于<code>x.n=3</code>已将全局变量指向的值修改为3，所以c打印的是<code>3</code>。所以答案是: 1-&gt;2-&gt;3</p>
-<h2 id="简单类型与复合类型的存储方式，"><a href="#简单类型与复合类型的存储方式，" class="headerlink" title="简单类型与复合类型的存储方式，"></a>简单类型与复合类型的存储方式，</h2><p>基本数据类型是通过栈存储，复杂数据类型(数组、对象等)是通过堆存储</p>
-<p>栈和堆得区别是什么</p>
-<p>栈(Stack)会（系统）自动分配内存空间，会自动释放（自动申请，自动释放/临时/局部）</p>
-<p>堆(Heap)动态分配的内存，大小不定也不会自动释放(手动申请，手动释放/持久化/全局)</p>
-<p>基本类型数据直接存储在栈中的简单数据段，占用空间小，大小固定，属于被频繁访问的数据。</p>
-<p>引用类型数据存储在堆中的对象，占用空间大，大小不固定，如果存放在栈中会影响程序性能。引用类型在栈的存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用类型时，首先检索它在栈中的指针，读取该指针，指针内容就是它在堆中的地址，然后通过堆中的地址取得实体。</p>
+<p>前面我们讲到的都是值的赋值，现在就到值的传递了。由于全局变量<code>x</code>是复合值，所以函数传递<code>x</code>实际是将全局<code>x</code>的引用复制一份传给参数<code>x[foo(x)]</code>，而全局变量<code>x</code>仍然指向<code>{n:1}</code>。毫无疑问，<code>a</code>会打印<code>1</code>。</p>
+<p>由于函数传递<code>{n:1}</code>引用给函数内的<code>x</code>变量（局部变量），所以<code>x.n=3</code>将会修改引用的值由<code>{n:1}</code>变为<code>{n:3}</code>，因为全局变量<code>x</code>与局部变量<code>x</code>指向同一个值，所以这时候全局变量<code>x</code>就会被影响，变为<code>{n:3}</code>。</p>
+<p><code>x={ n:2 };</code>将局部变量<code>x</code>指向新的内存空间，全局变量<code>x</code>不受影响，所以<code>b</code>打印的是<code>2</code>，<code>c</code>是要打印全局变量<code>x</code>，由于<code>x.n=3</code>已将全局变量指向的值修改为<code>3</code>，所以<code>c</code>打印的是<code>3</code>。所以答案是: <strong>1-&gt;2-&gt;3</strong></p>
+<h2 id="简单值与复合值的存储方式"><a href="#简单值与复合值的存储方式" class="headerlink" title="简单值与复合值的存储方式"></a>简单值与复合值的存储方式</h2><p>基本数据类型是通过<strong>栈</strong>存储，复合(/引用)数据类型(数组、对象等)是通过<strong>堆</strong>存储</p>
+<p><strong>栈和堆的区别是什么？</strong></p>
 <p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/stack_heap.jpg" alt="栈和堆"></p>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>简单类型：</p>
-<ul>
-<li>null</li>
-<li>undefined</li>
-<li>string</li>
-<li>number</li>
-<li>boolean</li>
-<li>symbol</li>
-</ul>
-<p>复杂类型： object [built-in function / native function]</p>
-<ul>
-<li>String</li>
-<li>Number</li>
-<li>Boolean</li>
-<li>Array</li>
-<li>Object</li>
-<li>Function</li>
-<li>RegExp</li>
-<li>Date</li>
-<li>Error</li>
-<li>Symbol</li>
-</ul>
+<p><strong>栈(Stack)</strong> 会（系统）自动分配内存空间，会自动释放（<strong>自动申请，自动释放/临时/局部</strong>）</p>
+<p><strong>堆(Heap)</strong> 动态分配的内存，大小不定也不会自动释放(<strong>手动申请，手动释放/持久化/全局</strong>)</p>
+<p>基本类型数据直接存储在<strong>栈</strong>中的简单数据段，占用空间小，大小固定，属于被频繁访问的数据。</p>
+<p>引用类型数据存储在<strong>堆</strong>中的对象，占用空间大，大小不固定，如果存放在栈中会影响程序性能。引用类型在栈的存储了<strong>指针</strong>，该指针指向<strong>堆</strong>中<strong>该实体的起始地址</strong>。当解释器寻找引用类型时，<em>首先</em>检索它在栈中的指针，读取该指针，指针内容就是它在堆中的地址，<em>然后</em>通过堆中的地址取得实体。</p>
 
     </article>
     <!-- 前后页  -->
@@ -532,7 +522,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单类型与复合类型的存储方式，"><span class="toc-number">1.</span> <span class="toc-text">简单类型与复合类型的存储方式，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型"><span class="toc-number">2.</span> <span class="toc-text">类型</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单值与复合值"><span class="toc-number">1.</span> <span class="toc-text">简单值与复合值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单值与复合值的存储方式"><span class="toc-number">2.</span> <span class="toc-text">简单值与复合值的存储方式</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
