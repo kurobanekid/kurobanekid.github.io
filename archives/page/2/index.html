@@ -233,12 +233,13 @@
 </div>
         <script>
   // load webfont-loader async, and add callback function
-  function async(u, c) {
+  function async(u, cb, err) {
     var d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
-    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
     s.parentNode.insertBefore(o, s);
   }
   
@@ -307,7 +308,26 @@
     }
   }
 
-  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
@@ -854,7 +874,15 @@ jsonContent:
         author: 'kurobanekid'
     }
 </script>
+    <!-- CDN failover -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
     <script src="/scripts/main.js"></script>
     <!-- busuanzi  -->
     
