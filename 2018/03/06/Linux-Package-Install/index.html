@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="kurobanekid">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="kurobanekid">
+    <meta name="keywords" content="kurobanekid's Blog | kurobanekid">
+    <meta name="description" content="">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Linux软件包管理 · KurobaneKid&#39;s Lab</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180524 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180524 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+        
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >KurobaneKid&#39;s Lab</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Linux软件包管理</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>KurobaneKid's Lab</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Linux软件包管理
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,739</span> / Reading time: <span class="post-count">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/03/06</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="Linux软件包安装方式："><a href="#Linux软件包安装方式：" class="headerlink" title="Linux软件包安装方式："></a>Linux软件包安装方式：</h2><h3 id="1-源码包安装"><a href="#1-源码包安装" class="headerlink" title="1. 源码包安装"></a>1. 源码包安装</h3><p>下载源码包后，通过本地编译后进行安装</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>开源。能够阅读软件包(Package)的源代码进行学习</li>
+<li>自由度高。通过修改软件源码进行自定义安装</li>
+<li>稳定性高。因为软件是通过本机编译安装。比同样软件用rpm包安装后提升大约5%，也更加稳定</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>安装比较大的软件时，步骤较为繁琐，有可能出错</li>
+<li>安装时间较长（因为需要进行编译）</li>
+<li>编译可能报错，对入门者并不友好</li>
+</ul>
+<h3 id="2-二进制安装（rpm包-系统默认安装）"><a href="#2-二进制安装（rpm包-系统默认安装）" class="headerlink" title="2. 二进制安装（rpm包/系统默认安装）"></a>2. 二进制安装（rpm包/系统默认安装）</h3><p>软件厂商将源码包编译成二进制文件，用户直接安装就可以</p>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>安装时间较快</li>
+<li>通过简单命令能够对软件进行升级、删除、修改</li>
+</ul>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>自由度比源码包安装方式弱一些。</li>
+<li>安装依懒性（安装该软件包之前需要安装其他包）<ol>
+<li>线性依赖<br>A–依赖–&gt;B–依赖–&gt;C（先安装C然后安装B最后再到A，如果需要进行删除则顺序相反）</li>
+<li>循环依赖<br>A-&gt;B-&gt;C-&gt;A 通过命令一次同时安装A、B、C</li>
+<li>模块依赖<br>可以通过<a href="http://www.rpmfind.net/" target="_blank" rel="external">模块依赖查询网站</a>解决</li>
+</ol>
+</li>
+</ul>
+<h3 id="rpm软件包-包名组成"><a href="#rpm软件包-包名组成" class="headerlink" title="rpm软件包 包名组成"></a>rpm软件包 包名组成</h3><blockquote>
+<p>yum-3.4.3-150.el7.centos.noarch.rpm</p>
+<ul>
+<li>包名 — yum</li>
+<li>版本号 — 3.4.3</li>
+<li>rpm包发行号 — 150.el7 - (修正版本号 <strong>.</strong> 发行版本Enterprise Linux)</li>
+<li>适合的Linux平台 — centos</li>
+<li>适合的硬件平台（可通过 “/proc/cpuinfo” 查看CPU信息）<ol>
+<li>noarch(no architecture) — 对CPU平台不作要求</li>
+<li>x86_64 — x86架构的64位CPU</li>
+<li>i386 — x86架构的32位CPU</li>
+</ol>
+</li>
+<li>rpm包后缀 — .rpm</li>
+</ul>
+</blockquote>
+<p><strong>包全名是指包名至后缀</strong><br>使用包全名来操作未安装的软件包，需要注意路径问题<br>使用包名来操作已安装的软件包，linux通过搜索/var/lib/rpm中的数据库检测软件包是否安装</p>
+<h2 id="rpm包安装方式"><a href="#rpm包安装方式" class="headerlink" title="rpm包安装方式"></a>rpm包安装方式</h2><p>本地安装 &amp; yum在线安装</p>
+<h2 id="rpm包-本地方式-的安装、升级、卸载、查询"><a href="#rpm包-本地方式-的安装、升级、卸载、查询" class="headerlink" title="rpm包 本地方式 的安装、升级、卸载、查询"></a>rpm包 本地方式 的安装、升级、卸载、查询</h2><h3 id="rpm安装"><a href="#rpm安装" class="headerlink" title="rpm安装"></a>rpm安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">rpm -ivh 包全名（软件包未安装）</div><div class="line">    -i install 安装</div><div class="line">    [-v] verbose 显示详细信息</div><div class="line">    [-h] hash 显示进度</div><div class="line">    [--nodeps] 不检测依赖性（然并卵。不检测依赖性即使安装了也未必能用，因为可能会依赖其他包）</div></pre></td></tr></table></figure>
+<h3 id="rpm升级"><a href="#rpm升级" class="headerlink" title="rpm升级"></a>rpm升级</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -U 包名（软件包已安装）</div><div class="line">    -U update 升级</div></pre></td></tr></table></figure>
+<h3 id="rpm卸载"><a href="#rpm卸载" class="headerlink" title="rpm卸载"></a>rpm卸载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -e 包名</div><div class="line">    -e erase 卸载/消除/抹去</div><div class="line">    [--nodeps] 不检测依赖性（然并卵）</div></pre></td></tr></table></figure>
+<h3 id="rpm查询常用命令"><a href="#rpm查询常用命令" class="headerlink" title="rpm查询常用命令"></a>rpm查询常用命令</h3><h4 id="查询软件包是否安装"><a href="#查询软件包是否安装" class="headerlink" title="查询软件包是否安装"></a>查询软件包是否安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -q 包名</div><div class="line">    [-a] all 所有（查询所有已安装的包）</div></pre></td></tr></table></figure>
+<h4 id="反向查询文件所属的软件包"><a href="#反向查询文件所属的软件包" class="headerlink" title="反向查询文件所属的软件包"></a>反向查询文件所属的软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -qf 系统文件名</div><div class="line">    -f file 文件</div></pre></td></tr></table></figure>
+<h4 id="查询软件包信息"><a href="#查询软件包信息" class="headerlink" title="查询软件包信息"></a>查询软件包信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -qi 包名</div><div class="line">    -i infomation 信息</div><div class="line">    [-p] package 查询未安装包的信息 *注意后面需要包全名而不是包名</div></pre></td></tr></table></figure>
+<h4 id="查询软件包中的所有文件安装位置"><a href="#查询软件包中的所有文件安装位置" class="headerlink" title="查询软件包中的所有文件安装位置"></a>查询软件包中的所有文件安装位置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm -ql 包名</div><div class="line">    -q q 查询</div><div class="line">    -l list 列表</div><div class="line">    [-p] package 查询未安装包的文件安装位置 *注意后面需要包全名而不是包名</div></pre></td></tr></table></figure>
+<h4 id="查询软件包的依赖性"><a href="#查询软件包的依赖性" class="headerlink" title="查询软件包的依赖性"></a>查询软件包的依赖性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -qR 包名</div><div class="line">    -R require 依赖/需要</div><div class="line">    [-p] package 查询未安装包的依赖性 *注意后面需要包全名而不是包名</div></pre></td></tr></table></figure>
+<h2 id="yum在线安装"><a href="#yum在线安装" class="headerlink" title="yum在线安装"></a>yum在线安装</h2><p>yum源保存在 /etc/yum.repos.d/CentOS-Base.repo 中<br>下面以阿里云ECS服务器为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line">name=CentOS-$releasever</div><div class="line">enabled=1</div><div class="line">failovermethod=priority</div><div class="line">baseurl=http://mirrors.cloud.aliyuncs.com/centos/$releasever/os/$basearch/</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=http://mirrors.cloud.aliyuncs.com/centos/RPM-GPG-KEY-CentOS-7</div></pre></td></tr></table></figure>
+<p>[base] – 容器名称<br>name – 容器说明<br>enabled – 是否生效 0表示不生效 1表示生效<br>failovermethod – 有两个值可以选择，priority是默认值，表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示在列出的服务器中随机选择<br>baseurl – yum源的服务器地址<br>mirrorlist – 镜像服务器的地址列表<br>gpgcheck – 1/0，分别代表repo中下载的rpm包是否是否进行gpg校验，以确定rpm包的来源是有效和安全的。如果没有这一项，默认是检查的。<br>gpgkey – gpg校验公钥文件存放位置</p>
+<h3 id="yum-安装、升级、卸载"><a href="#yum-安装、升级、卸载" class="headerlink" title="yum 安装、升级、卸载"></a>yum 安装、升级、卸载</h3><h3 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install 包名（自动从服务器进行搜索）</div><div class="line">    [-y] 自动回答yes，不添加情况下，安装需要按y表示确认安装</div></pre></td></tr></table></figure>
+<h3 id="yum升级"><a href="#yum升级" class="headerlink" title="yum升级"></a>yum升级</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum update 包名</div><div class="line">    [-y] 自动回答yes，不添加情况下，安装需要按y表示确认升级</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>如果省略包名，默认升级所有软件包，包括系统内核。这就有可能导致服务器无法启动，因此可以通过 sudo vi /etc/yum.conf，在[main]的最后添加 exclude=kernel*。表示yum升级时不升级系统内核</p>
+<h3 id="yum卸载"><a href="#yum卸载" class="headerlink" title="yum卸载"></a>yum卸载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum remove 包名</div><div class="line">    [-y] 自动回答yes，不添加情况下，安装需要按y表示确认卸载</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>卸载操作会将目标软件包的依赖包都一起卸载，而这些依赖包有可能是系统所依赖的，因此不建议使用</p>
+<h2 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h2><p>源码包安装位置与rpm包安装位置不同，也因此导致两者的管理方式不同<br>rpm包默认安装路径</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">rpm包默认安装路径</th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/</td>
+<td style="text-align:left">配置文件安装目录</td>
+</tr>
+<tr>
+<td style="text-align:left">/usr/bin/</td>
+<td style="text-align:left">可执行文件安装目录</td>
+</tr>
+<tr>
+<td style="text-align:left">/usr/lib/</td>
+<td style="text-align:left">程序使用函数库的保存位置</td>
+</tr>
+<tr>
+<td style="text-align:left">/usr/share/doc/</td>
+<td style="text-align:left">软件基本使用手册保存位置</td>
+</tr>
+<tr>
+<td style="text-align:left">/usr/share/man/</td>
+<td style="text-align:left">帮助文件保存位置</td>
+</tr>
+</tbody>
+</table>
+<p>一般默认将源码包放在/usr/local/src，将源码包安装在/usr/local</p>
+<p>因为安装位置的不同导致了源码包与rpm包的管理有所区别<br>rpm包安装的软件（服务）可以使用系统命令进行管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. service httpd start</div><div class="line">OR</div><div class="line">2. /etc/rc.d/init.d/httpd start</div></pre></td></tr></table></figure>
+<p>第一种方式，其实是系统从/etc/rc.d/init.d/中找到相应的服务，然后进行管理。<br>第二种方式是源码包安装的软件（服务）由于没有安装到默认路径中，因此只能通过绝对路径进行管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/apache2/bin/apachectl start</div></pre></td></tr></table></figure></p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p>源码包需要本地编译后进行安装</p>
+<ol>
+<li>下载源码包</li>
+<li>解压源码包，然后进入解压包目录</li>
+<li>执行./configure进行编译， ./configure 后可以加一些参数，进行安装配置。该语句执行完后会在目录中生成Makefile，里面保存的是安装配置以及系统环境信息等。</li>
+<li>make进行编译，调用gcc编译成机器语言。这一步如果出错，使用make clean将编译缓存清除即可，此时还没有生成安装的目标目录</li>
+<li>make install</li>
+</ol>
+<h2 id="源码包卸载"><a href="#源码包卸载" class="headerlink" title="源码包卸载"></a>源码包卸载</h2><p>直接删除安装目录就可以，不会像Windows那样遗留垃圾文件</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://kurobane.me">kurobanekid</a>
+            <p>原文链接: <a href="https://kurobane.me/2018/03/06/Linux-Package-Install/">https://kurobane.me/2018/03/06/Linux-Package-Install/</a>
+            <p>发表日期: <a href="https://kurobane.me/2018/03/06/Linux-Package-Install/">March 6th 2018, 4:36:18</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/03/08/height-100不起作用/" title= height:100%不起作用? >
+                    <div class="nextTitle">height:100%不起作用?</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/06/几个简单排序算法/" title= 几个简单排序算法 >
+                    <div class="prevTitle">几个简单排序算法</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "Linux软件包管理", // 可选。默认为 location.href
+        owner: 'kurobanekid',
+        repo: 'blog-comment',
+        oauth: {
+            client_id: '0d35d3bbc9231f294b1f',
+            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:kurobane@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/kurobanekid" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+    
+    <span id="busuanzi_container_site_uv">UV: <span id="busuanzi_value_site_uv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux软件包安装方式："><span class="toc-number">1.</span> <span class="toc-text">Linux软件包安装方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-源码包安装"><span class="toc-number">1.1.</span> <span class="toc-text">1. 源码包安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-二进制安装（rpm包-系统默认安装）"><span class="toc-number">1.2.</span> <span class="toc-text">2. 二进制安装（rpm包/系统默认安装）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm软件包-包名组成"><span class="toc-number">1.3.</span> <span class="toc-text">rpm软件包 包名组成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rpm包安装方式"><span class="toc-number">2.</span> <span class="toc-text">rpm包安装方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rpm包-本地方式-的安装、升级、卸载、查询"><span class="toc-number">3.</span> <span class="toc-text">rpm包 本地方式 的安装、升级、卸载、查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm安装"><span class="toc-number">3.1.</span> <span class="toc-text">rpm安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm升级"><span class="toc-number">3.2.</span> <span class="toc-text">rpm升级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm卸载"><span class="toc-number">3.3.</span> <span class="toc-text">rpm卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm查询常用命令"><span class="toc-number">3.4.</span> <span class="toc-text">rpm查询常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查询软件包是否安装"><span class="toc-number">3.4.1.</span> <span class="toc-text">查询软件包是否安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向查询文件所属的软件包"><span class="toc-number">3.4.2.</span> <span class="toc-text">反向查询文件所属的软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询软件包信息"><span class="toc-number">3.4.3.</span> <span class="toc-text">查询软件包信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询软件包中的所有文件安装位置"><span class="toc-number">3.4.4.</span> <span class="toc-text">查询软件包中的所有文件安装位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询软件包的依赖性"><span class="toc-number">3.4.5.</span> <span class="toc-text">查询软件包的依赖性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum在线安装"><span class="toc-number">4.</span> <span class="toc-text">yum在线安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#yum-安装、升级、卸载"><span class="toc-number">4.1.</span> <span class="toc-text">yum 安装、升级、卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum安装"><span class="toc-number">4.2.</span> <span class="toc-text">yum安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum升级"><span class="toc-number">4.3.</span> <span class="toc-text">yum升级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum卸载"><span class="toc-number">4.4.</span> <span class="toc-text">yum卸载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码包安装"><span class="toc-number">5.</span> <span class="toc-text">源码包安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装过程"><span class="toc-number">5.1.</span> <span class="toc-text">安装过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码包卸载"><span class="toc-number">6.</span> <span class="toc-text">源码包卸载</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2018/04/17/值和引用/" >值和引用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2018/04/15/JS中的强制类型转换/" >JS中的强制类型转换</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2018/03/24/浏览器http缓存机制/" >浏览器http缓存机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2018/03/22/Promise轻松入门/" >Promise轻松入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2018/03/14/background/" >详解background属性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2018/03/11/多列布局/" >多列布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2018/03/10/居中布局/" >居中布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2018/03/10/position/" >position（定位）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2018/03/10/button与input-type-button区别/" >button与input type="button"区别</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2018/03/09/DFS-BFS/" >深度优先遍历与广度优先遍历</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2018/03/08/height-100不起作用/" >height:100%不起作用?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2018/03/06/Linux-Package-Install/" >Linux软件包管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2018/03/06/几个简单排序算法/" >几个简单排序算法</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/15</span><a class="archive-post-title" href= "/2017/10/15/extends/" >JS继承</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="算法"><span class="iconfont-archer">&#xe606;</span>算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'kurobanekid'
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+
