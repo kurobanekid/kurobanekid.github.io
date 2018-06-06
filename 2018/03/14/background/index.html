@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="kurobanekid">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="kurobanekid">
+    <meta name="keywords" content="kurobanekid's Blog | kurobanekid">
+    <meta name="description" content="">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>详解background属性 · KurobaneKid&#39;s Lab</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+        
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    <!-- algolia -->
+    <script>
+        
+        var hits = JSON.parse('{"per_page":10}')
+        var labels = JSON.parse('{"input_placeholder":"Search for Posts","hits_empty":"We did not find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}')
+
+        var algolia = {
+            applicationID: 'WF2R4V3B7P',
+            apiKey: 'f989cf689eb8d805996a9a1c2eea78c5',
+            indexName: 'blog',
+            hits: hits,
+            labels: labels
+        }
+    </script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >KurobaneKid&#39;s Lab</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">详解background属性</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>KurobaneKid's Lab</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            详解background属性
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">2,204</span> / Reading time: <span class="post-count">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/03/14</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>本文主要对background的各个“小”属性进行讲解。</p>
+<h2 id="background-color"><a href="#background-color" class="headerlink" title="background-color"></a>background-color</h2><p>背景颜色默认是<code>transparent</code>（透明）。可以通过十六进制、rgb/rgba、hsl/hsla设置背景颜色</p>
+<h3 id="rgb"><a href="#rgb" class="headerlink" title="rgb"></a>rgb</h3><ul>
+<li>r: red(0-255)</li>
+<li>g: green(0-255)</li>
+<li>b: blue(0-255)</li>
+<li>a: alpha(0-1)透明度，数值越小，透明度越高</li>
+</ul>
+<h3 id="十六进制"><a href="#十六进制" class="headerlink" title="十六进制"></a>十六进制</h3><p>实质是将rgb十进制转换为十六进制。e.g rgb(0,255,0) (0=&gt;00,255=&gt;ff,0=&gt;00) ===&gt;&gt; #00ff00 =&gt; #0f0</p>
+<h3 id="hsl"><a href="#hsl" class="headerlink" title="hsl"></a>hsl</h3><ul>
+<li>h: 色相(0-360) 0/360表示红色,120表示绿色,240表示蓝色</li>
+<li>s: 饱和度(0%-100%)</li>
+<li>l: 明度(0%-100%)</li>
+<li>a: 透明度(0-1)，数值越小，透明度越高</li>
+</ul>
+<h2 id="background-image"><a href="#background-image" class="headerlink" title="background-image"></a>background-image</h2><p><code>url(&quot;../path/target.jpg&quot;)</code></p>
+<p>设置多个url（用逗号分隔）表示引入多个背景图片，这些图片的图层按顺序递减，即第一个在最上层。</p>
+<p><strong><code>background-color</code>背景颜色在最底层，即在所有的背景图片之下</strong></p>
+<h2 id="background-repeat"><a href="#background-repeat" class="headerlink" title="background-repeat"></a>background-repeat</h2><ul>
+<li><code>repeat</code>(默认), 表示背景图片将在X轴以及Y轴上进行重复<ul>
+<li><code>repeatX</code>, 表示背景图片只在X轴上进行重复</li>
+<li><code>repeatY</code>, 表示背景图片只在Y轴上进行重复</li>
+</ul>
+</li>
+<li><code>space</code>, 尽可能重复，第一个以及最后一个背景图片将固定在元素相应的边上，同时空白将均匀分布在图像之间</li>
+<li><code>round</code>, 随着允许的空间在尺寸上的增长, 被重复的背景图片将会被<strong>伸展(不留空隙)</strong>, 直到有足够的空间来添加下一个图片。当下一个图片被添加后, 所有的当前的图片会被压缩来腾出空间</li>
+<li><code>no-repeat</code>，背景图片不会被重复</li>
+</ul>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-repeat.png" alt="background-repeat"></p>
+<h2 id="background-attachment"><a href="#background-attachment" class="headerlink" title="background-attachment"></a>background-attachment</h2><p>指定背景图片是在视口中固定的还是随包含它的区块滚动的</p>
+<ul>
+<li><code>scroll</code>(默认)，表示背景相对于<strong>元素本身固定</strong>，<strong>背景并不随元素的内容滚动</strong></li>
+<li><code>local</code>，表示背景相对于<strong>元素的内容固定</strong>。如果一个元素拥有滚动机制，<strong>背景将会随着元素的内容滚动</strong></li>
+<li><code>fixed</code>，表示背景相对于视口固定。即使一个元素拥有滚动机制，背景也不会随着元素的内容滚动（较少使用）</li>
+</ul>
+<p>下面gif图的演示按上面介绍的关键字顺序排列</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-attachment.gif" alt="background-attachment"></p>
+<h2 id="background-position"><a href="#background-position" class="headerlink" title="background-position"></a>background-position</h2><p>指定背景图片的初始位置, <em>默认初始位置为原点(0,0)，即背景参照区域的左上角</em></p>
+<p>写法1:</p>
+<p>&lt;position&gt; = [ left | center | right | top | bottom | &lt;length&gt; | &lt;percentage&gt;]<br>一个值 =&gt; 关键字或长度或百分比，表示X轴位置，这是Y轴默认为<code>center</code></p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_1.png" alt="position_1"></p>
+<p>写法2:</p>
+<p>&lt;position&gt; = [ left | center | right | &lt;length&gt; | &lt;percentage&gt;]   [ top | center | bottom | &lt;length&gt; | &lt;percentage&gt;]<br>两个值 =&gt; 第一个值表示X轴位置，第二个值表示Y轴位置</p>
+<p><strong>百分比需要注意</strong></p>
+<p><code>background-position: 30% 50%;</code> 表示背景图片(30%,50%)的点与背景参照区域(30%,50%)的点重合。如下图所示</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-position.png" alt="background-position百分比"></p>
+<p>写法3:</p>
+<p>&lt;position&gt; = [ center | [ left | right ] [ &lt;length&gt; | &lt;percentage&gt; ] ?]    [ center | [ top | bottom ] [ &lt;length&gt; | &lt;percentage&gt; ] ?]</p>
+<p>四个值 =&gt; 第一个和第三个关键字表示参照目标，第二个和第四个数值表示相对参照目标的偏移量</p>
+<p><code>background-position: left 100px top 50px</code>，表示背景图片相对<em>背景参照区域</em>(接下来会介绍)左边偏移100px,上边偏移50px</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/position_4.png" alt="position_4"></p>
+<p>一般为减少页面的http请求次数，通常会将一些图标、小图片合成在同一张图片上[雪碧(spite)图]，通过background-position对雪碧图进行偏移获取目标图片。</p>
+<h2 id="background-origin"><a href="#background-origin" class="headerlink" title="background-origin"></a>background-origin</h2><p>指定背景图片原点位置的背景参照区域</p>
+<ul>
+<li><code>padding-box</code>(默认)，内边距区</li>
+<li><code>border-box</code>，边框区</li>
+<li><code>content-box</code>，内容区</li>
+</ul>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/bg-origin.png" alt="background-origin"></p>
+<h2 id="background-clip"><a href="#background-clip" class="headerlink" title="background-clip"></a>background-clip</h2><p>背景（图片或颜色）裁剪</p>
+<ul>
+<li><code>border-box</code>(默认), 背景延伸到边框外沿, 但是边框绘制在”元素的背景之上”（背景被边框覆盖，边框在上层，背景在下层）</li>
+<li><code>padding-box</code>, 背景裁剪到内边距外沿</li>
+<li><code>content-box</code>, 背景裁剪到内容区外沿</li>
+</ul>
+<p><code>Tip</code>:</p>
+<p>默认情况下内边距会承载背景图片或背景颜色（边框也会，因为background-origin默认是border-box）。很多时候我们希望背景只延伸到内容区，这时可以将该属性设置为<code>content-box</code>达到目的。<br><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/clip_content-box.png" alt="background-clip:content-box"></p>
+<h2 id="background-size"><a href="#background-size" class="headerlink" title="background-size"></a>background-size</h2><p>设置背景图片大小</p>
+<p>&lt;bg-size&gt; = [&lt;length&gt; | &lt;percentage&gt;| auto ] {1,2} | cover | contain</p>
+<ul>
+<li><code>auto</code>(默认)，以背景图片的比例缩放背景图片</li>
+<li><code>cover</code>，背景图片尽可能小，但宽度以及高度都不能小于背景参照区域</li>
+<li><code>contain</code>，背景图片尽可能大，但宽度以及高度都不能大于背景参照区域</li>
+</ul>
+<p>除了关键字以外，还能通过长度或者百分比进行设置，其中需要注意的是<strong>百分比是相对背景参照区域计算，而并非自身</strong></p>
+<ul>
+<li>一个值: 这个值指定图片的宽度，图片的高度隐式的为auto，即高度根据指定宽度进行等比例缩放</li>
+<li>两个值: 第一个值为图片宽度，第二个值为图片高度</li>
+<li>逗号分隔的多个值: 设置多重背景</li>
+</ul>
+<h2 id="linear-gradient"><a href="#linear-gradient" class="headerlink" title="linear-gradient()"></a>linear-gradient()</h2><p>线性渐变，<code>background-image</code>其中一种表示方法，并非是属性</p>
+<p>linear-gradient = [ [ &lt;angle&gt; | to &lt;side-or-corner&gt; , ] ]  ? &lt;color-stop&gt;[,&lt;color-stop&gt;]</p>
+<p>&lt;side-or-corner&gt; = [left | right] || [ top | bottom ]</p>
+<p>例如</p>
+<ul>
+<li>to left 从右到左</li>
+<li>to top 从下到上</li>
+<li>to right top 从左下角到右上角</li>
+</ul>
+<p>&lt;color-stop&gt; = &lt;color&gt; [&lt;percentage&gt; | &lt;length&gt;] ?</p>
+<p>例子</p>
+<p>linear-gradient(red, green) === linear-gradient(red 0, green 100%)&nbsp;&nbsp;<br><code>to &lt;side-or-corner&gt;</code> 默认为<code>to bottom</code>, 所以颜色由上到下渐变（红-&gt;绿），并且存在两个颜色值，那么相当于第一个为0%，第二个为100%。所以三个颜色值(red , green, blue) === (red 0, green 50%, blue 100%)</p>
+<p>linear-gradient(135deg, red, green) =&gt; 135度方向，进行线性渐变</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/angle.png" alt="线性渐变角度"></p>
+<p>linear-gradient(135deg, red 20%, green 50%);<br>20%的位置为红色，50%的位置为绿色。实际上20%前面都是红色，50%后面都是绿色，存在渐变的地方是20%-50%;</p>
+<p><em>这里的百分比的参照是什么呢？</em> =&gt; 指定角度方向上的直线与元素相交构成的线段长度</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98%E7%99%BE%E5%88%86%E6%AF%94.png" alt="线性渐变百分比"></p>
+<h2 id="radial-gradient"><a href="#radial-gradient" class="headerlink" title="radial-gradient()"></a>radial-gradient()</h2><p>径向渐变，<code>background-image</code>其中一种表示方法，并非是属性</p>
+<p>第一种写法：</p>
+<p>[ circle || &lt;length&gt; ] [ at &lt;position&gt;]   |<br>[ ellipse || [&lt;length&gt; | &lt;percentage&gt; ] { 2 } ] [ at &lt;position&gt; ]  <strong><code>? ,</code></strong><br>&lt;color-stop&gt; [ , &lt;color-stop&gt; ]+</p>
+<p><em>通过对比可以看出，椭圆比圆多了一个参数 &lt;percentage&gt;{2}，其中{2}是因为圆只要指定半径就能确定圆的大小，而椭圆则需要指定X轴半径与Y轴半径长度才能确定椭圆大小，此外除了可以用length表示长度，还可以使用百分比表示，其中百分比是相对背景参照区域大小而言</em></p>
+<p><code>radial-gradient(circle 50px at 10px 20px, red, blue)</code> 圆形-半径50px-圆心在(10px,20px) - 从红色渐变到蓝色，省略百分比的默认情况与线性渐变一样（0=&gt;100%）</p>
+<p><code>radial-gradient(ellipse 100px 50px, red, blue)</code> 椭圆 - X轴半径100px,Y轴半径50px - 圆点在背景参照区域中点（没有指定，默认元素中点，圆的情况也一样）- 从红色渐变到蓝色</p>
+<p>第二中写法</p>
+<p>通过&lt;extent-keyword&gt;指定圆/椭圆的大小</p>
+<p>[ [ circle | ellipse ] || &lt;extent-keyword&gt; ] [at &lt;position&gt;] ? , | at &lt;position&gt; , | at &lt;position&gt; ] <strong><code>? ,</code></strong><br>&lt;color-stop&gt; [ , &lt;color-stop&gt; ]+</p>
+<p>&lt;extent-keyword&gt; = closest-side | farthest-side | closest-corner | farthest-corner(默认)<br>依次是 最近的边 | 最远的边 | 最近的角 | 最远的角，它们都是将圆点作为参照点</p>
+<p><code>radial-gradient(circle, red, blue)</code> 圆形 - 半径为[ 圆点到最远的角 ]的距离 - 圆点在背景参照区域中点 - 从红色渐变到蓝色</p>
+<p><code>radial-gradient(ellipse, red, blue)</code> 椭圆 - 圆点在背景参照区域中点 - 从红色渐变到蓝色<br>缺省extent-keyword，同样默认是farthest-corner，但是椭圆有些复杂。</p>
+<ol>
+<li>椭圆经过 [最远的角] 的点</li>
+<li>椭圆X轴半径 / Y轴半径  =  X轴closest-side / Y轴closest-side</li>
+</ol>
+<p>以上两点可唯一确定一个椭圆</p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/ellipse.png" alt="椭圆farthest-corner"></p>
+<h2 id="background缩写"><a href="#background缩写" class="headerlink" title="background缩写"></a>background缩写</h2><p>为书写方便，将background缩写为bg</p>
+<p>background = [ &lt;bg-layer&gt; , ] * &lt;final-bg-layer&gt;<br>（总式）: 背景可由多个背景层组成，最后一层为final-bg-layer（最后一层背景层）</p>
+<p>&lt;bg-layer&gt; = &lt;bg-image&gt; || &lt;position&gt; [ / &lt;bg-size&gt;]? || &lt;repeat-style&gt; || &lt;attachment&gt; || &lt;box&gt; || &lt;box&gt;<br>（除去最后一层以外的背景层）: 当<code>position</code>与<code>bg-size</code>都需要进行设置的时候，两者会有冲突，因此在两者之间需要添加 <strong>/</strong> 。最后有两个box，第一个是指<code>bg-orgin</code>的box值,第二个是<code>bg-clip</code>的box值，如果只有一个box值，那么该值同时作为bg-origin与bg-clip的值</p>
+<p>&lt;final-bg-layer&gt; = &lt;bg-layer&gt; || &lt;’background-color’&gt;<br>（最后一层背景层）: 唯一不同的地方是多了一个指定<code>background-color</code>选项。即如果要为背景指定背景颜色，那么需要放到最后一层背景层的最后一个参数位置进行设置</p>
+<p><code>background: url(green.png) 0 0 / 20px 20px no-repeat , url(red.png) 50% 50% / contain no-repeat content-box #4285F4;</code></p>
+<p><img src="https://kurobaneblog.oss-cn-shenzhen.aliyuncs.com/blogimg/background%E5%B1%9E%E6%80%A7/background_simple.png" alt="background简写"></p>
+<p>以上就是background的所有介绍，终于写完了😂</p>
+<p><strong>😬未经作者许可，不可转载😬</strong></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://kurobane.me">kurobanekid</a>
+            <p>原文链接: <a href="https://kurobane.me/2018/03/14/background/">https://kurobane.me/2018/03/14/background/</a>
+            <p>发表日期: <a href="https://kurobane.me/2018/03/14/background/">March 14th 2018, 11:19:15</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/03/22/Promise轻松入门/" title= Promise轻松入门 >
+                    <div class="nextTitle">Promise轻松入门</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/11/多列布局/" title= 多列布局 >
+                    <div class="prevTitle">多列布局</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "详解background属性", // 可选。默认为 location.href
+        owner: 'kurobanekid',
+        repo: 'blog-comment',
+        oauth: {
+            client_id: '0d35d3bbc9231f294b1f',
+            client_secret: 'ee9f51bb88337e755c9e788e6ca27dd244b140fe',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:kurobane@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/kurobanekid" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+    
+    <span id="busuanzi_container_site_uv">UV: <span id="busuanzi_value_site_uv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background-color"><span class="toc-number">1.</span> <span class="toc-text">background-color</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rgb"><span class="toc-number">1.1.</span> <span class="toc-text">rgb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十六进制"><span class="toc-number">1.2.</span> <span class="toc-text">十六进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hsl"><span class="toc-number">1.3.</span> <span class="toc-text">hsl</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image"><span class="toc-number">2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-repeat"><span class="toc-number">3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-attachment"><span class="toc-number">4.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-position"><span class="toc-number">5.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">6.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">7.</span> <span class="toc-text">background-clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size"><span class="toc-number">8.</span> <span class="toc-text">background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-number">9.</span> <span class="toc-text">linear-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-number">10.</span> <span class="toc-text">radial-gradient()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background缩写"><span class="toc-number">11.</span> <span class="toc-text">background缩写</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 14
+        <!-- search  -->
+        </div>
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2018/04/17/值和引用/" >值和引用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2018/04/15/JS中的强制类型转换/" >JS中的强制类型转换</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2018/03/24/浏览器http缓存机制/" >浏览器http缓存机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2018/03/22/Promise轻松入门/" >Promise轻松入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/2018/03/14/background/" >详解background属性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2018/03/11/多列布局/" >多列布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2018/03/10/居中布局/" >居中布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2018/03/10/position/" >position（定位）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2018/03/10/button与input-type-button区别/" >button与input type="button"区别</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2018/03/09/DFS-BFS/" >深度优先遍历与广度优先遍历</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2018/03/08/height-100不起作用/" >height:100%不起作用?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2018/03/06/Linux-Package-Install/" >Linux软件包管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2018/03/06/几个简单排序算法/" >几个简单排序算法</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/15</span><a class="archive-post-title" href= "/2017/10/15/extends/" >JS继承</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="算法"><span class="iconfont-archer">&#xe606;</span>算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "kurobanekid"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
